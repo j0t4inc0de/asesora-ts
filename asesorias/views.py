@@ -4,5 +4,4 @@ from .models import Servicio
 
 def home(request):
     servicios = Servicio.objects.all()
-    return render(request, 'asesorias/templates/index.html', {'servicios': servicios})
-
+    return render(request, 'index.html', {'servicios': servicios})
