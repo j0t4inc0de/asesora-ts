@@ -34,8 +34,14 @@ def agendar_cita(request):
                 asunto,
                 mensaje,
                 settings.EMAIL_HOST_USER,
-                [settings.EMAIL_HOST_USER], # Se envía a sí misma (la encargada)
+                [settings.EMAIL_HOST_USER],
                 fail_silently=False,
             )
-            
             return redirect('confirmacion_solicitud')
+    else:
+        form = FormularioDiagnostico()
+        
+    return render(request, 'solicitud.html', {'form': form})
+
+def confirmacion_solicitud(request):
+    return render(request, 'confirmacion.html')
