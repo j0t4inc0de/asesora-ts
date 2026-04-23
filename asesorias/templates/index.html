@@ -103,85 +103,14 @@
           con claridad y eficacia técnica.
         </p>
       </div>
+
       <div class="grid md:grid-cols-3 gap-8">
-        <!-- Service Card 1 -->
-        <div
-          class="bg-surface-container-lowest rounded-2xl p-8 shadow-ambient-low hover:shadow-ambient-high transition-shadow border-t-4 border-secondary group"
-        >
-          <div
-            class="w-12 h-12 rounded-xl bg-secondary-fixed text-secondary flex items-center justify-center mb-6 group-hover:scale-110 transition-transform"
-          >
-            <span
-              class="material-symbols-outlined text-2xl"
-              style="font-variation-settings: &quot;FILL&quot; 1"
-              >description</span
-            >
-          </div>
-          <h3 class="font-h3 text-h3 text-primary mb-3">Informes Sociales</h3>
-          <p class="font-body-md text-body-md text-on-surface-variant mb-6">
-            Elaboración de peritajes e informes socioeconómicos con alto rigor
-            técnico para fines judiciales, institucionales o académicos.
-          </p>
-          <a
-            class="font-label-md text-label-md text-secondary flex items-center gap-2 hover:gap-3 transition-all"
-            href="#"
-          >
-            Saber más
-            <span class="material-symbols-outlined text-sm">arrow_forward</span>
-          </a>
-        </div>
-        <!-- Service Card 2 -->
-        <div
-          class="bg-surface-container-lowest rounded-2xl p-8 shadow-ambient-low hover:shadow-ambient-high transition-shadow border-t-4 border-tertiary-container group"
-        >
-          <div
-            class="w-12 h-12 rounded-xl bg-tertiary-fixed text-tertiary-container flex items-center justify-center mb-6 group-hover:scale-110 transition-transform"
-          >
-            <span
-              class="material-symbols-outlined text-2xl"
-              style="font-variation-settings: &quot;FILL&quot; 1"
-              >assignment_turned_in</span
-            >
-          </div>
-          <h3 class="font-h3 text-h3 text-primary mb-3">Postulaciones</h3>
-          <p class="font-body-md text-body-md text-on-surface-variant mb-6">
-            Asesoría experta en la postulación a subsidios habitacionales, becas
-            estatales y programas de apoyo gubernamental.
-          </p>
-          <a
-            class="font-label-md text-label-md text-tertiary-container flex items-center gap-2 hover:gap-3 transition-all"
-            href="#"
-          >
-            Saber más
-            <span class="material-symbols-outlined text-sm">arrow_forward</span>
-          </a>
-        </div>
-        <!-- Service Card 3 -->
-        <div
-          class="bg-surface-container-lowest rounded-2xl p-8 shadow-ambient-low hover:shadow-ambient-high transition-shadow border-t-4 border-primary-container group"
-        >
-          <div
-            class="w-12 h-12 rounded-xl bg-primary-fixed text-primary flex items-center justify-center mb-6 group-hover:scale-110 transition-transform"
-          >
-            <span
-              class="material-symbols-outlined text-2xl"
-              style="font-variation-settings: &quot;FILL&quot; 1"
-              >diversity_1</span
-            >
-          </div>
-          <h3 class="font-h3 text-h3 text-primary mb-3">Atención Integral</h3>
-          <p class="font-body-md text-body-md text-on-surface-variant mb-6">
-            Acompañamiento psicosocial personalizado para familias y personas
-            individuales enfrentando procesos de crisis o transición.
-          </p>
-          <a
-            class="font-label-md text-label-md text-primary flex items-center gap-2 hover:gap-3 transition-all"
-            href="#"
-          >
-            Saber más
-            <span class="material-symbols-outlined text-sm">arrow_forward</span>
-          </a>
-        </div>
+        {% for servicio in servicios %} {% include
+        'components/card_servicio.html' with servicio=servicio %} {% empty %}
+        <p class="text-center col-span-3 text-slate-500 italic">
+          Aún no hay servicios registrados en el sistema.
+        </p>
+        {% endfor %}
       </div>
     </div>
   </section>
