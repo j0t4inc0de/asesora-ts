@@ -105,12 +105,24 @@
       </div>
 
       <div class="grid md:grid-cols-3 gap-8">
-        {% for servicio in servicios %} {% include
-        'components/card_servicio.html' with servicio=servicio %} {% empty %}
-        <p class="text-center col-span-3 text-slate-500 italic">
-          Aún no hay servicios registrados en el sistema.
-        </p>
+        
+        {% for servicio in servicios %}
+          <div class="p-8 border border-slate-100 rounded-2xl shadow-sm hover:shadow-md transition bg-slate-50 flex flex-col justify-between">
+              <div>
+                  <h4 class="text-xl font-bold text-teal-800 mb-3">{{ servicio.nombre }}</h4>
+                  <p class="text-slate-600 mb-6">{{ servicio.descripcion }}</p>
+              </div>
+              <div class="flex justify-between items-center border-t pt-4">
+                  <span class="text-lg font-bold text-slate-800">${{ servicio.precio }}</span>
+                  <button class="text-teal-600 font-semibold hover:underline">Ver más</button>
+              </div>
+          </div>
+          {% empty %}
+          <p class="text-center col-span-3 text-slate-500 italic">
+            Aún no hay servicios registrados en el sistema.
+          </p>
         {% endfor %}
+        
       </div>
     </div>
   </section>
@@ -280,23 +292,40 @@
             </div>
 
             <div>
-              <label class="block font-label-md text-label-md text-on-surface mb-2">Selecciona Fecha Deseada (Opcional)</label>
+              <label
+                class="block font-label-md text-label-md text-on-surface mb-2"
+                >Selecciona Fecha Deseada (Opcional)</label
+              >
               <div class="relative">
                 <input
                   name="fecha_deseada"
                   value="{{ form.fecha_deseada.value|default_if_none:'' }}"
-                  min="{{ hoy }}"  class="w-full rounded-xl border-surface-variant focus:border-primary focus:ring-primary text-body-md py-3 px-4 shadow-sm text-on-surface-variant"
+                  min="{{ hoy }}"
+                  class="w-full rounded-xl border-surface-variant focus:border-primary focus:ring-primary text-body-md py-3 px-4 shadow-sm text-on-surface-variant"
                   type="date"
                 />
               </div>
               {% if form.fecha_deseada.errors %}
-                <p class="text-red-500 text-sm mt-2 font-bold">{{ form.fecha_deseada.errors.0 }}</p>
+              <p class="text-red-500 text-sm mt-2 font-bold">
+                {{ form.fecha_deseada.errors.0 }}
+              </p>
               {% endif %}
             </div>
 
             <div>
-              <label class="block font-label-md text-label-md text-on-surface mb-2">Breve descripción del motivo de consulta</label>
-              <textarea name="motivo_consulta" required class="w-full rounded-xl border-surface-variant focus:border-primary focus:ring-primary text-body-md py-3 px-4 shadow-sm resize-none" placeholder="¿En qué podemos ayudarte?" rows="3">{% if form.motivo_consulta.value %}{{ form.motivo_consulta.value }}{% endif %}</textarea>
+              <label
+                class="block font-label-md text-label-md text-on-surface mb-2"
+                >Breve descripción del motivo de consulta</label
+              >
+              <textarea
+                name="motivo_consulta"
+                required
+                class="w-full rounded-xl border-surface-variant focus:border-primary focus:ring-primary text-body-md py-3 px-4 shadow-sm resize-none"
+                placeholder="¿En qué podemos ayudarte?"
+                rows="3"
+              >
+{% if form.motivo_consulta.value %}{{ form.motivo_consulta.value }}{% endif %}</textarea
+              >
             </div>
 
             <button
@@ -321,29 +350,28 @@
     </div>
   </section>
 </main>
-{% endblock %}
-
-{% block extra_js %}
+{% endblock %} {% block extra_js %}
 <script>
-  document.addEventListener("DOMContentLoaded", function() {
-      
-      const rutInput = document.querySelector('input[name="rut"]');
-      if (rutInput) {
-          rutInput.addEventListener('input', function(e) {
-              let valor = e.target.value.replace(/[^0-9kK]/g, '').toUpperCase();
-              if (valor.length > 1) {
-                  valor = valor.slice(0, -1) + '-' + valor.slice(-1);
-              }
-              e.target.value = valor;
-          });
-      }
+  document.addEventListener("DOMContentLoaded", function () {
+    const rutInput = document.querySelector('input[name="rut"]');
+    if (rutInput) {
+      rutInput.addEventListener("input", function (e) {
+        let valor = e.target.value.replace(/[^0-9kK]/g, "").toUpperCase();
+        if (valor.length > 1) {
+          valor = valor.slice(0, -1) + "-" + valor.slice(-1);
+        }
+        e.target.value = valor;
+      });
+    }
 
-      const dateInput = document.querySelector('input[name="fecha_deseada"]');
-      if (dateInput) {
-          const tzoffset = (new Date()).getTimezoneOffset() * 60000;
-          const hoyLocal = new Date(Date.now() - tzoffset).toISOString().split('T')[0];
-          dateInput.setAttribute('min', hoyLocal);
-      }
+    const dateInput = document.querySelector('input[name="fecha_deseada"]');
+    if (dateInput) {
+      const tzoffset = new Date().getTimezoneOffset() * 60000;
+      const hoyLocal = new Date(Date.now() - tzoffset)
+        .toISOString()
+        .split("T")[0];
+      dateInput.setAttribute("min", hoyLocal);
+    }
   });
 </script>
 {% endblock %}
