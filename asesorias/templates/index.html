@@ -381,9 +381,11 @@
     </div>
   </section>
 </main>
-{% endblock %} {% block extra_js %}
 <script>
-  document.addEventListener("DOMContentLoaded", function () {
+  // Esta función se asegura de que el código corra aunque el script esté al final
+  (function() {
+    console.log("¡Motor de agendamiento activo y cargado!");
+
     const rutInput = document.querySelector('input[name="rut"]');
     if (rutInput) {
       rutInput.addEventListener("input", function (e) {
@@ -395,21 +397,28 @@
       });
     }
 
-    const botonesHora = document.querySelectorAll(".btn-hora");
     const inputOculto = document.getElementById("input_fecha_hora");
-    botonesHora.forEach((boton) => {
-      boton.addEventListener("click", function () {
-        botonesHora.forEach((b) => {
-          b.classList.remove("bg-teal-600", "text-white");
-          b.classList.add("bg-slate-50", "text-teal-700");
-        });
+    
+    document.addEventListener("click", function(e) {
+        const boton = e.target.closest(".btn-hora");
+        
+        if (boton) {
+            console.log("Clic detectado en hora:", boton.getAttribute("data-datetime"));
+            
+            document.querySelectorAll(".btn-hora").forEach(b => {
+                b.style.backgroundColor = ""; 
+                b.style.color = "";
+                b.classList.remove("ring-2", "ring-teal-400");
+            });
 
-        this.classList.remove("bg-slate-50", "text-teal-700");
-        this.classList.add("bg-teal-600", "text-white");
+            boton.style.backgroundColor = "#0d9488"; // Verde Teal
+            boton.style.color = "#ffffff";           // Blanco
+            boton.classList.add("ring-2", "ring-teal-400");
 
-        inputOculto.value = this.getAttribute("data-datetime");
-      });
+            inputOculto.value = boton.getAttribute("data-datetime");
+            console.log("Valor guardado en el formulario:", inputOculto.value);
+        }
     });
-  });
+  })();
 </script>
 {% endblock %}
