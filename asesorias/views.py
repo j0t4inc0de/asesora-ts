@@ -39,9 +39,10 @@ def agendar_cita(request):
             )
             return redirect('confirmacion_solicitud')
     else:
-        form = FormularioDiagnostico()
+        servicios = Servicio.objects.all()
+        return render(request, 'index.html', {'servicios': servicios, 'form': form})
         
-    return render(request, 'solicitud.html', {'form': form})
+    return redirect('home')
 
 def confirmacion_solicitud(request):
     return render(request, 'confirmacion.html')
