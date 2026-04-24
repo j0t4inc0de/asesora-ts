@@ -11,10 +11,14 @@ class Servicio(models.Model):
 
 class Cliente(models.Model):
     nombre = models.CharField(max_length=100)
+    rut = models.CharField(max_length=12, unique=True)
     email = models.EmailField(unique=True)
     telefono = models.CharField(max_length=15)
     motivo_consulta = models.TextField()
     fecha_registro = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.nombre} ({self.rut})"
 
 class Cita(models.Model):
     ESTADOS = [('P', 'Pendiente'), ('C', 'Confirmada'), ('X', 'Cancelada')]

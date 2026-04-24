@@ -19,7 +19,7 @@ class FormularioDiagnostico(forms.ModelForm):
     
     def clean_rut(self):
         rut = self.cleaned_data.get('rut').upper().replace(".", "").replace("-", "")
-        if not re.match(r"^\d{7,8}[0-9K]$Generic", rut):
+        if not re.match(r"^\d{7,8}[0-9K]$", rut):
             raise forms.ValidationError("El RUT no tiene un formato válido.")
         
         cuerpo = rut[:-1]
