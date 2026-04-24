@@ -204,11 +204,25 @@
             action="{% url 'agendar_cita' %}"
             class="space-y-6"
           >
-            {% csrf_token %} {% if form.errors %}
+            {% csrf_token %} 
+            {% if error %}
             <div
-              class="bg-red-50 border-l-4 border-red-500 text-red-700 p-4 rounded mb-6 text-sm"
+              class="bg-red-50 border-l-4 border-red-500 text-red-700 p-4 rounded-xl mb-6 text-sm shadow-sm"
             >
-              <p class="font-bold">Hay errores en tu solicitud:</p>
+              <div class="flex items-center gap-2 mb-1">
+                <span class="material-symbols-outlined text-red-600"
+                  >error</span
+                >
+                <p class="font-bold text-base">Hora no disponible</p>
+              </div>
+              <p>{{ error }}</p>
+            </div>
+            {% endif %}
+            {% if form.errors %}
+            <div
+              class="bg-red-50 border-l-4 border-red-500 text-red-700 p-4 rounded-xl mb-6 text-sm"
+            >
+              <p class="font-bold">Hay errores en los campos de tu solicitud:</p>
               {{ form.errors }}
             </div>
             {% endif %}
@@ -383,7 +397,7 @@
 </main>
 <script>
   // Esta función se asegura de que el código corra aunque el script esté al final
-  (function() {
+  (function () {
     console.log("¡Motor de agendamiento activo y cargado!");
 
     const rutInput = document.querySelector('input[name="rut"]');
@@ -398,26 +412,29 @@
     }
 
     const inputOculto = document.getElementById("input_fecha_hora");
-    
-    document.addEventListener("click", function(e) {
-        const boton = e.target.closest(".btn-hora");
-        
-        if (boton) {
-            console.log("Clic detectado en hora:", boton.getAttribute("data-datetime"));
-            
-            document.querySelectorAll(".btn-hora").forEach(b => {
-                b.style.backgroundColor = ""; 
-                b.style.color = "";
-                b.classList.remove("ring-2", "ring-teal-400");
-            });
 
-            boton.style.backgroundColor = "#0d9488"; // Verde Teal
-            boton.style.color = "#ffffff";           // Blanco
-            boton.classList.add("ring-2", "ring-teal-400");
+    document.addEventListener("click", function (e) {
+      const boton = e.target.closest(".btn-hora");
 
-            inputOculto.value = boton.getAttribute("data-datetime");
-            console.log("Valor guardado en el formulario:", inputOculto.value);
-        }
+      if (boton) {
+        console.log(
+          "Clic detectado en hora:",
+          boton.getAttribute("data-datetime"),
+        );
+
+        document.querySelectorAll(".btn-hora").forEach((b) => {
+          b.style.backgroundColor = "";
+          b.style.color = "";
+          b.classList.remove("ring-2", "ring-teal-400");
+        });
+
+        boton.style.backgroundColor = "#0d9488"; // Verde Teal
+        boton.style.color = "#ffffff"; // Blanco
+        boton.classList.add("ring-2", "ring-teal-400");
+
+        inputOculto.value = boton.getAttribute("data-datetime");
+        console.log("Valor guardado en el formulario:", inputOculto.value);
+      }
     });
   })();
 </script>
