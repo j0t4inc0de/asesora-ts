@@ -69,7 +69,7 @@ def obtener_slots_disponibles():
     hoy = timezone.now().date()
     slots_disponibles = []
     
-    for i in range(14): # Revisaremos las próximas 2 semanas
+    for i in range(7): # Revisaremos las próximas 2 semanas
         dia_actual = hoy + timedelta(days=i)
         dia_semana_num = dia_actual.weekday() # 0 = Lunes, 6 = Domingo
         
