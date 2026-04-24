@@ -2,6 +2,7 @@ from django.shortcuts import redirect, render
 from django.core.mail import send_mail
 from django.conf import settings
 from django.utils import timezone
+from django.db import IntegrityError
 from datetime import date, timedelta, datetime
 from .models import Servicio, HorarioAtencion, Cita
 from .forms import FormularioDiagnostico
@@ -29,19 +30,37 @@ def agendar_cita(request):
 
         if form.is_valid() and fecha_hora_str and nombre_servicio:
             datos = form.cleaned_data
-
-            cliente = form.save()
-
-            servicio_obj = Servicio.objects.get(nombre=nombre_servicio)
             fecha_hora_obj = timezone.make_aware(
                 datetime.strptime(fecha_hora_str, '%Y-%m-%d %H:%M:%S'))
 
-            Cita.objects.create(
-                cliente=cliente,
-                servicio=servicio_obj,
-                fecha_hora=fecha_hora_obj,
-                estado='P'  # Pendiente
-            )
+            if Cita.objects.filter(fecha_hora=fecha_hora_obj).exclude(estado='X').exists():
+                return render(request, 'index.html', {
+                    'form': form,  # Le devolvemos el form para que no pierda sus datos
+                    'servicios': Servicio.objects.all(),
+                    # Recarga las horas reales disponibles
+                    'slots_disponibles': obtener_slots_disponibles(),
+                    'error': "¡Ups! Esa hora acaba de ser reservada por otra persona mientras leías. Por favor, selecciona una nueva hora."
+                })
+
+            try:
+                cliente = form.save()
+                servicio_obj = Servicio.objects.get(nombre=nombre_servicio)
+
+                Cita.objects.create(
+                    cliente=cliente,
+                    servicio=servicio_obj,
+                    fecha_hora=fecha_hora_obj,
+                    estado='P'  # Pendiente
+                )
+
+            except IntegrityError:
+                cliente.delete()
+                return render(request, 'index.html', {
+                    'form': form,
+                    'servicios': Servicio.objects.all(),
+                    'slots_disponibles': obtener_slots_disponibles(),
+                    'error': "Esa hora se ocupó en este preciso instante. Selecciona otra disponibilidad."
+                })
 
             asunto = f"Nueva Cita Agendada: {datos['nombre']}"
             mensaje = f"""¡Hola! Has recibido una nueva reserva en AsesoraTS Chile:
