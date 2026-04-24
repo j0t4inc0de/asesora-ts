@@ -18,13 +18,15 @@ class FormularioDiagnostico(forms.ModelForm):
         }
     
     def clean_rut(self):
-        rut = self.cleaned_data.get('rut').upper().replace(".", "").replace("-", "")
-        if not re.match(r"^\d{7,8}[0-9K]$", rut):
-            raise forms.ValidationError("El RUT no tiene un formato válido.")
-        
-        cuerpo = rut[:-1]
-        dv = rut[-1]
-        
+        rut_raw = self.cleaned_data.get('rut', '').upper().strip()
+        rut_clean = "".join(filter(lambda char: char.isdigit() or char == 'K', rut_raw))
+
+        if not (8 <= len(rut_clean) <= 9):
+            raise forms.ValidationError("El RUT no es válido (debe tener entre 8 y 9 caracteres).")
+
+        cuerpo = rut_clean[:-1]
+        dv = rut_clean[-1]
+
         suma = 0
         multiplo = 2
         for c in reversed(cuerpo):
@@ -35,6 +37,6 @@ class FormularioDiagnostico(forms.ModelForm):
         dvr = 'K' if res == 10 else '0' if res == 11 else str(res)
         
         if dv != dvr:
-            raise forms.ValidationError("El RUT ingresado es incorrecto.")
+            raise forms.ValidationError("El RUT es incorrecto (dígito verificador no coincide).")
         
-        return rut
+        return f"{cuerpo}-{dv}"

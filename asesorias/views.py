@@ -5,10 +5,12 @@ from .models import Servicio
 from .forms import FormularioDiagnostico
 # Create your views here.
 
+
 def home(request):
     servicios = Servicio.objects.all()
     form = FormularioDiagnostico()
     return render(request, 'index.html', {'servicios': servicios, 'form': form})
+
 
 def agendar_cita(request):
     if request.method == 'POST':
@@ -16,7 +18,7 @@ def agendar_cita(request):
         if form.is_valid():
             datos = form.cleaned_data
             cliente = form.save()
-            
+
             asunto = f"Nuevo Formulario de Contacto: {datos['nombre']}"
             mensaje = f"""
             Has recibido una nueva solicitud en AsesoraTS Chile:
@@ -28,7 +30,7 @@ def agendar_cita(request):
             - Motivo: {datos['motivo_consulta']}
             - Fecha sugerida: {datos['fecha_deseada'] if datos['fecha_deseada'] else 'No especificada'}
             """
-            
+
             # Enviamos el correo
             send_mail(
                 asunto,
@@ -40,9 +42,13 @@ def agendar_cita(request):
             return redirect('confirmacion_solicitud')
     else:
         servicios = Servicio.objects.all()
-        return render(request, 'index.html', {'servicios': servicios, 'form': form})
-        
+        return render(request, 'index.html', {
+            'form': form,
+            'servicios': servicios
+        })
+
     return redirect('home')
+
 
 def confirmacion_solicitud(request):
     return render(request, 'confirmacion.html')

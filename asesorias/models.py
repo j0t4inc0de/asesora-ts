@@ -11,8 +11,8 @@ class Servicio(models.Model):
 
 class Cliente(models.Model):
     nombre = models.CharField(max_length=100)
-    rut = models.CharField(max_length=12, unique=True)
-    email = models.EmailField(unique=True)
+    rut = models.CharField(max_length=12)
+    email = models.EmailField()
     telefono = models.CharField(max_length=15)
     motivo_consulta = models.TextField()
     fecha_registro = models.DateTimeField(auto_now_add=True)
