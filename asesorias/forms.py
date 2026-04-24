@@ -4,13 +4,13 @@ import re
 
 class FormularioDiagnostico(forms.ModelForm):
     fecha_hora_reserva = forms.DateTimeField(
-        widget=forms.HiddenInput(), # Se ocultará porque usaremos botones/calendario visual en HTML
+        widget=forms.HiddenInput(),
         required=True
     )
 
     class Meta:
         model = Cliente
-        fields = ['nombre', 'email', 'telefono', 'rut', 'motivo_consulta', 'fecha_deseada']
+        fields = ['nombre', 'email', 'telefono', 'rut', 'motivo_consulta', 'fecha_hora_reserva']
         widgets = {
             'telefono': forms.TextInput(attrs={'placeholder': '+569 XXXX XXXX', 'required': 'true'}),
             'motivo_consulta': forms.Textarea(attrs={'rows': 4, 'required': 'true'}),
