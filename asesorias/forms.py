@@ -3,10 +3,9 @@ from .models import Cliente
 import re
 
 class FormularioDiagnostico(forms.ModelForm):
-    fecha_deseada = forms.DateField(
-        required=False, 
-        widget=forms.DateInput(attrs={'type': 'date'}),
-        label="Selecciona Fecha deseada"
+    fecha_hora_reserva = forms.DateTimeField(
+        widget=forms.HiddenInput(), # Se ocultará porque usaremos botones/calendario visual en HTML
+        required=True
     )
 
     class Meta:
