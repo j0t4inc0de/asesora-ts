@@ -280,18 +280,18 @@
             </div>
 
             <div>
-              <label
-                class="block font-label-md text-label-md text-on-surface mb-2"
-                >Selecciona Fecha Deseada (Opcional)</label
-              >
+              <label class="block font-label-md text-label-md text-on-surface mb-2">Selecciona Fecha Deseada (Opcional)</label>
               <div class="relative">
                 <input
                   name="fecha_deseada"
                   value="{{ form.fecha_deseada.value|default_if_none:'' }}"
-                  class="w-full rounded-xl border-surface-variant focus:border-primary focus:ring-primary text-body-md py-3 px-4 shadow-sm text-on-surface-variant"
+                  min="{{ hoy }}"  class="w-full rounded-xl border-surface-variant focus:border-primary focus:ring-primary text-body-md py-3 px-4 shadow-sm text-on-surface-variant"
                   type="date"
                 />
               </div>
+              {% if form.fecha_deseada.errors %}
+                <p class="text-red-500 text-sm mt-2 font-bold">{{ form.fecha_deseada.errors.0 }}</p>
+              {% endif %}
             </div>
 
             <div>
@@ -337,7 +337,7 @@
               e.target.value = valor;
           });
       }
- navegador)
+
       const dateInput = document.querySelector('input[name="fecha_deseada"]');
       if (dateInput) {
           const tzoffset = (new Date()).getTimezoneOffset() * 60000;
