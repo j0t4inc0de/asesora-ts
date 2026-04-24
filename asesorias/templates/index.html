@@ -295,20 +295,8 @@
             </div>
 
             <div>
-              <label
-                class="block font-label-md text-label-md text-on-surface mb-2"
-                >Breve descripción del motivo de consulta</label
-              >
-              <textarea
-                name="motivo_consulta"
-                required
-                class="w-full rounded-xl border-surface-variant focus:border-primary focus:ring-primary text-body-md py-3 px-4 shadow-sm resize-none"
-                placeholder="¿En qué podemos ayudarte?"
-                rows="3"
-              >
-              {{ form.motivo_consulta.value|default_if_none:'' }}
-              </textarea
-              >
+              <label class="block font-label-md text-label-md text-on-surface mb-2">Breve descripción del motivo de consulta</label>
+              <textarea name="motivo_consulta" required class="w-full rounded-xl border-surface-variant focus:border-primary focus:ring-primary text-body-md py-3 px-4 shadow-sm resize-none" placeholder="¿En qué podemos ayudarte?" rows="3">{% if form.motivo_consulta.value %}{{ form.motivo_consulta.value }}{% endif %}</textarea>
             </div>
 
             <button
@@ -335,16 +323,27 @@
 </main>
 {% endblock %}
 
+{% block extra_js %}
 <script>
-  // Este script formatea el RUT en vivo agregando el guion
-  const rutInput = document.querySelector('input[name="rut"]');
-  if (rutInput) {
-      rutInput.addEventListener('input', function(e) {
-          let valor = e.target.value.replace(/[^0-9kK]/g, '').toUpperCase();
-          if (valor.length > 1) {
-              valor = valor.slice(0, -1) + '-' + valor.slice(-1);
-          }
-          e.target.value = valor;
-      });
-  }
+  document.addEventListener("DOMContentLoaded", function() {
+      
+      const rutInput = document.querySelector('input[name="rut"]');
+      if (rutInput) {
+          rutInput.addEventListener('input', function(e) {
+              let valor = e.target.value.replace(/[^0-9kK]/g, '').toUpperCase();
+              if (valor.length > 1) {
+                  valor = valor.slice(0, -1) + '-' + valor.slice(-1);
+              }
+              e.target.value = valor;
+          });
+      }
+ navegador)
+      const dateInput = document.querySelector('input[name="fecha_deseada"]');
+      if (dateInput) {
+          const tzoffset = (new Date()).getTimezoneOffset() * 60000;
+          const hoyLocal = new Date(Date.now() - tzoffset).toISOString().split('T')[0];
+          dateInput.setAttribute('min', hoyLocal);
+      }
+  });
 </script>
+{% endblock %}
