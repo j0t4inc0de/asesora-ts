@@ -182,14 +182,30 @@
         </div>
         <!-- Form Side -->
         <div class="p-12 lg:p-16 bg-surface-container-lowest">
-          <form class="space-y-6">
-            <div class="grid grid-cols-2 gap-6">
+          <form
+            method="POST"
+            action="{% url 'agendar_cita' %}"
+            class="space-y-6"
+          >
+            {% csrf_token %} {% if form.errors %}
+            <div
+              class="bg-red-50 border-l-4 border-red-500 text-red-700 p-4 rounded mb-6 text-sm"
+            >
+              <p class="font-bold">Hay errores en tu solicitud:</p>
+              {{ form.errors }}
+            </div>
+            {% endif %}
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <label
                   class="block font-label-md text-label-md text-on-surface mb-2"
                   >Nombre Completo</label
                 >
                 <input
+                  name="nombre"
+                  value="{{ form.nombre.value|default_if_none:'' }}"
+                  required
                   class="w-full rounded-xl border-surface-variant focus:border-primary focus:ring-primary text-body-md py-3 px-4 shadow-sm"
                   placeholder="Ej. Camila Reyes"
                   type="text"
@@ -201,58 +217,109 @@
                   >RUT</label
                 >
                 <input
+                  name="rut"
+                  value="{{ form.rut.value|default_if_none:'' }}"
+                  required
                   class="w-full rounded-xl border-surface-variant focus:border-primary focus:ring-primary text-body-md py-3 px-4 shadow-sm"
                   placeholder="12.345.678-9"
                   type="text"
                 />
               </div>
             </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label
+                  class="block font-label-md text-label-md text-on-surface mb-2"
+                  >Correo Electrónico</label
+                >
+                <input
+                  name="email"
+                  value="{{ form.email.value|default_if_none:'' }}"
+                  required
+                  class="w-full rounded-xl border-surface-variant focus:border-primary focus:ring-primary text-body-md py-3 px-4 shadow-sm"
+                  placeholder="ejemplo@correo.com"
+                  type="email"
+                />
+              </div>
+              <div>
+                <label
+                  class="block font-label-md text-label-md text-on-surface mb-2"
+                  >Teléfono de Contacto</label
+                >
+                <input
+                  name="telefono"
+                  value="{{ form.telefono.value|default_if_none:'' }}"
+                  required
+                  class="w-full rounded-xl border-surface-variant focus:border-primary focus:ring-primary text-body-md py-3 px-4 shadow-sm"
+                  placeholder="+569 XXXX XXXX"
+                  type="text"
+                />
+              </div>
+            </div>
+
             <div>
               <label
                 class="block font-label-md text-label-md text-on-surface mb-2"
                 >Servicio de Interés</label
               >
               <select
+                name="servicio"
+                required
                 class="w-full rounded-xl border-surface-variant focus:border-primary focus:ring-primary text-body-md py-3 px-4 shadow-sm bg-white"
               >
-                <option>Informe Social Pericial</option>
-                <option>Asesoría en Postulaciones</option>
-                <option>Acompañamiento Integral</option>
-                <option>Evaluación Socioeconómica</option>
+                <option value="" disabled selected>
+                  Seleccione un servicio...
+                </option>
+                {% for servicio in servicios %}
+                <option value="{{ servicio.nombre }}">
+                  {{ servicio.nombre }}
+                </option>
+                {% endfor %}
               </select>
             </div>
+
             <div>
               <label
                 class="block font-label-md text-label-md text-on-surface mb-2"
-                >Selecciona Fecha Deseada</label
+                >Selecciona Fecha Deseada (Opcional)</label
               >
               <div class="relative">
                 <input
+                  name="fecha_deseada"
+                  value="{{ form.fecha_deseada.value|default_if_none:'' }}"
                   class="w-full rounded-xl border-surface-variant focus:border-primary focus:ring-primary text-body-md py-3 px-4 shadow-sm text-on-surface-variant"
                   type="date"
                 />
               </div>
             </div>
+
             <div>
               <label
                 class="block font-label-md text-label-md text-on-surface mb-2"
-                >Breve descripción del motivo de consulta (Opcional)</label
+                >Breve descripción del motivo de consulta</label
               >
               <textarea
+                name="motivo_consulta"
+                required
                 class="w-full rounded-xl border-surface-variant focus:border-primary focus:ring-primary text-body-md py-3 px-4 shadow-sm resize-none"
                 placeholder="¿En qué podemos ayudarte?"
                 rows="3"
-              ></textarea>
+              >
+{{ form.motivo_consulta.value|default_if_none:'' }}</textarea
+              >
             </div>
+
             <button
-              class="w-full font-label-md text-label-md bg-secondary text-on-secondary py-4 rounded-xl hover:bg-secondary/90 transition-colors shadow-ambient-low flex justify-center items-center gap-2"
-              type="button"
+              type="submit"
+              class="w-full font-label-md text-label-md bg-secondary text-white py-4 rounded-xl hover:bg-secondary/90 transition-colors shadow-ambient-low flex justify-center items-center gap-2"
             >
               Solicitar Agendamiento
               <span class="material-symbols-outlined text-sm"
                 >calendar_month</span
               >
             </button>
+
             <p
               class="font-caption text-caption text-center text-on-surface-variant mt-4"
             >

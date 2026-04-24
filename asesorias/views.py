@@ -7,7 +7,8 @@ from .forms import FormularioDiagnostico
 
 def home(request):
     servicios = Servicio.objects.all()
-    return render(request, 'index.html', {'servicios': servicios})
+    form = FormularioDiagnostico()
+    return render(request, 'index.html', {'servicios': servicios, 'form': form})
 
 def agendar_cita(request):
     if request.method == 'POST':
@@ -16,7 +17,6 @@ def agendar_cita(request):
             datos = form.cleaned_data
             cliente = form.save()
             
-            # Preparamos el contenido del correo para la Trabajadora Social
             asunto = f"Nuevo Formulario de Contacto: {datos['nombre']}"
             mensaje = f"""
             Has recibido una nueva solicitud en AsesoraTS Chile:
