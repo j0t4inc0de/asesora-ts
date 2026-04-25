@@ -1,4 +1,4 @@
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render, get_object_or_404
 from django.core.mail import send_mail
 from django.conf import settings
 from django.utils import timezone
@@ -24,6 +24,11 @@ def home(request):
     })
 
 
+def detalle_servicio(request, servicio_id):
+    servicio_obj = get_object_or_404(Servicio, id=servicio_id)
+    return render(request, 'detalle_servicio.html', {'servicio': servicio_obj})
+
+
 def agendar_cita(request):
     if request.method == 'POST':
         form = FormularioDiagnostico(request.POST)
@@ -36,7 +41,8 @@ def agendar_cita(request):
                 datetime.strptime(fecha_hora_str, '%Y-%m-%d %H:%M:%S'))
 
             if Cita.objects.filter(fecha_hora=fecha_hora_obj).exclude(estado='X').exists():
-                messages.error(request, "¡Ups! Esa hora acaba de ser reservada por otra persona mientras leías. Por favor, selecciona una nueva hora.")
+                messages.error(
+                    request, "¡Ups! Esa hora acaba de ser reservada por otra persona mientras leías. Por favor, selecciona una nueva hora.")
                 return redirect(reverse('home') + '#seccion-reserva')
 
             try:
@@ -52,7 +58,8 @@ def agendar_cita(request):
 
             except IntegrityError:
                 cliente.delete()
-                messages.error(request, "Esa hora se ocupó en este preciso instante. Selecciona otra disponibilidad.")
+                messages.error(
+                    request, "Esa hora se ocupó en este preciso instante. Selecciona otra disponibilidad.")
                 return redirect(reverse('home') + '#seccion-reserva')
 
             asunto = f"Nueva Cita Agendada: {datos['nombre']}"
@@ -67,13 +74,15 @@ HORA AGENDADA: {fecha_hora_obj.strftime('%d/%m/%Y a las %H:%M hrs')}
     • Servicio: {nombre_servicio}
     • Motivo: {datos['motivo_consulta']}
 """
-            send_mail(asunto, mensaje, settings.EMAIL_HOST_USER, [settings.EMAIL_HOST_USER], fail_silently=False)
+            send_mail(asunto, mensaje, settings.EMAIL_HOST_USER, [
+                      settings.EMAIL_HOST_USER], fail_silently=False)
 
             messages.success(request, "¡Tu cita ha sido solicitada con éxito!")
             return redirect('confirmacion_solicitud')
-            
+
         else:
-            messages.error(request, "Por favor, completa todos los campos correctamente y asegúrate de seleccionar una hora.")
+            messages.error(
+                request, "Por favor, completa todos los campos correctamente y asegúrate de seleccionar una hora.")
             return redirect(reverse('home') + '#seccion-reserva')
 
     return redirect('home')
