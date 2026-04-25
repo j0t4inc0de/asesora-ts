@@ -376,12 +376,19 @@
 
             <button
               type="submit"
-              class="w-full font-label-md text-label-md bg-secondary text-white py-4 rounded-xl hover:bg-secondary/90 transition-colors shadow-ambient-low flex justify-center items-center gap-2"
+              class="relative group w-full font-label-md text-label-md bg-sky-900 text-white py-4 rounded-xl hover:bg-sky-700 transition-colors shadow-ambient-low flex justify-center items-center gap-2 overflow-hidden"
             >
-              Solicitar Agendamiento
-              <span class="material-symbols-outlined text-sm"
-                >calendar_month</span
-              >
+              <div class="absolute inset-0 w-[150%] h-full bg-gradient-to-r from-transparent via-white/20 to-transparent z-0 pointer-events-none animate-shimmer"></div>
+              
+              <span class="material-symbols-outlined absolute top-2 right-1/4 text-white/80 text-sm opacity-0 animate-sparkle z-0 pointer-events-none" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+              <span class="material-symbols-outlined absolute bottom-2 left-1/4 text-white/80 text-xs opacity-0 animate-sparkle-delayed z-0 pointer-events-none" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+
+              <span class="relative z-10 flex items-center gap-2">
+                Solicitar Agendamiento
+                <span class="material-symbols-outlined text-sm"
+                  >calendar_month</span
+                >
+              </span>
             </button>
 
             <p

@@ -148,6 +148,21 @@
                 },
               ],
             },
+            keyframes: {
+              shimmer: {
+                "0%": { transform: "translateX(-150%) skewX(-15deg)" },
+                "20%, 100%": { transform: "translateX(300%) skewX(-15deg)" },
+              },
+              sparkle: {
+                "0%, 100%": { opacity: "0", transform: "scale(0) rotate(0deg)" },
+                "50%": { opacity: "1", transform: "scale(1) rotate(15deg)" },
+              }
+            },
+            animation: {
+              shimmer: "shimmer 6s ease-in-out infinite",
+              sparkle: "sparkle 4s ease-in-out infinite",
+              "sparkle-delayed": "sparkle 4s ease-in-out infinite 2s",
+            },
           },
         },
       };
