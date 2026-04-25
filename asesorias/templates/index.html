@@ -104,31 +104,29 @@
         </p>
       </div>
 
-      <div class="grid md:grid-cols-3 gap-8">
-        {% for servicio in servicios %}
-        <div
-          class="p-8 border border-slate-100 rounded-2xl shadow-sm hover:shadow-md transition bg-slate-50 flex flex-col justify-between"
+      <div class="relative group max-w-6xl mx-auto px-10">
+        <button 
+          onclick="scrollCarousel('prev')" 
+          class="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white/80 backdrop-blur-sm p-2 rounded-full shadow-lg border border-gray-100 hover:bg-teal-500 hover:text-white transition-all opacity-0 group-hover:opacity-100"
         >
-          <div>
-            <h4 class="text-xl font-bold text-teal-800 mb-3">
-              {{ servicio.nombre }}
-            </h4>
-            <p class="text-slate-600 mb-6">{{ servicio.descripcion }}</p>
-          </div>
-          <div class="flex justify-between items-center border-t pt-4">
-            <span class="text-lg font-bold text-slate-800"
-              >${{ servicio.precio }}</span
-            >
-            <button class="text-teal-600 font-semibold hover:underline">
-              Ver más
-            </button>
-          </div>
+          <span class="material-symbols-outlined">chevron_left</span>
+        </button>
+
+        <div 
+          id="service-carousel" 
+          class="flex overflow-x-hidden gap-4 scroll-smooth py-4 px-2"
+        >
+          {% for servicio in servicios %}
+              {% include 'components/card_servicio.html' %}
+          {% endfor %}
         </div>
-        {% empty %}
-        <p class="text-center col-span-3 text-slate-500 italic">
-          Aún no hay servicios registrados en el sistema.
-        </p>
-        {% endfor %}
+
+        <button 
+          onclick="scrollCarousel('next')" 
+          class="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white/80 backdrop-blur-sm p-2 rounded-full shadow-lg border border-gray-100 hover:bg-teal-500 hover:text-white transition-all opacity-0 group-hover:opacity-100"
+        >
+          <span class="material-symbols-outlined">chevron_right</span>
+        </button>
       </div>
     </div>
   </section>
@@ -392,7 +390,6 @@
   </section>
 </main>
 <script>
-  // Esta función se asegura de que el código corra aunque el script esté al final
   (function () {
     console.log("¡Motor de agendamiento activo y cargado!");
 
@@ -433,5 +430,47 @@
       }
     });
   })();
+
+  function scrollCarousel(direction) {
+    const container = document.getElementById('service-carousel');
+    
+    const card = container.firstElementChild;
+    const scrollAmount = card.offsetWidth + 16;
+
+    const maxScroll = container.scrollWidth - container.clientWidth;
+
+    if (direction === 'next') {
+      if (Math.ceil(container.scrollLeft) >= maxScroll) {
+        container.scrollTo({ left: 0, behavior: 'smooth' });
+      } else {
+        container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+      }
+    } else {
+      if (container.scrollLeft <= 0) {
+        container.scrollTo({ left: maxScroll, behavior: 'smooth' });
+      } else {
+        container.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+      }
+    }
+  }
+  let autoPlayInterval;
+  const carouselContainer = document.getElementById('service-carousel');
+  const intervalTime = 5000; // 5 segundos entre cada transición
+  
+  function startAutoPlay() {
+    stopAutoPlay();
+    autoPlayInterval = setInterval(() => {
+      scrollCarousel('next');
+    }, intervalTime);
+  }
+
+  function stopAutoPlay() {
+    clearInterval(autoPlayInterval);
+  }
+
+  startAutoPlay();
+  carouselContainer.addEventListener('mouseenter', stopAutoPlay); // Pausa al pasar el mouse
+  carouselContainer.addEventListener('mouseleave', startAutoPlay); // Reanuda al quitar el mouse
+  carouselContainer.addEventListener('touchstart', stopAutoPlay); // Pausa en móviles al tocar
 </script>
 {% endblock %}
