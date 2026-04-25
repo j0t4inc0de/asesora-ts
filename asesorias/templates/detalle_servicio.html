@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<main class="bg-slate-50 min-h-screen pb-24">
+  <header class="bg-white border-b border-slate-200 pt-32 pb-12 px-4">
+    <div class="max-w-4xl mx-auto">
+      <a href="{% url 'home' %}" class="inline-flex items-center text-teal-600 font-semibold mb-6 hover:gap-2 transition-all group">
+        <span class="material-symbols-outlined text-sm">arrow_back_ios</span>
+        Volver al inicio
+      </a>
+      
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+        <div>
+          <span class="bg-teal-100 text-teal-800 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+            Servicio Especializado
+          </span>
+          <h1 class="text-4xl md:text-5xl font-bold text-slate-900 mt-4 leading-tight">
+            {{ servicio.nombre }}
+          </h1>
+        </div>
+        <div class="bg-teal-50 p-6 rounded-2xl border border-teal-100 text-center min-w-[200px]">
+          <p class="text-slate-500 text-sm uppercase font-bold tracking-widest mb-1">Inversión</p>
+          <p class="text-3xl font-bold text-teal-700">${{ servicio.precio }}</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section class="max-w-4xl mx-auto px-4 mt-12">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+      
+      <div class="lg:col-span-2 space-y-12">
+        <article class="prose prose-slate prose-teal max-w-none">
+          <h2 class="text-2xl font-bold text-slate-800 flex items-center gap-2">
+            <span class="material-symbols-outlined text-teal-500">info</span>
+            ¿En qué consiste este servicio?
+          </h2>
+          <p class="text-slate-600 leading-relaxed text-lg">
+            {{ servicio.descripcion }}
+          </p>
+          
+          <div class="mt-6 text-slate-600 space-y-4">
+            {{ servicio.contenido_detallado|default:"Este servicio se realiza bajo estrictos estándares éticos, asegurando la confidencialidad y el rigor técnico necesario para cada caso particular."|linebreaks }}
+          </div>
+        </article>
+
+        <aside class="bg-white rounded-3xl p-8 shadow-sm border border-slate-200">
+          <h3 class="text-xl font-bold text-slate-800 mb-6 flex items-center gap-2">
+            <span class="material-symbols-outlined text-teal-500">library_books</span>
+            Fuentes y Marco Legal
+          </h3>
+          <ul class="space-y-4">
+            <li class="flex gap-4 p-4 rounded-xl hover:bg-slate-50 transition-colors border border-transparent hover:border-slate-100">
+              <span class="material-symbols-outlined text-slate-400">link</span>
+              <div>
+                <p class="font-bold text-slate-700">Ley N° 20.285 sobre Acceso a la Información</p>
+                <p class="text-sm text-slate-500 mb-2">Base legal para la gestión de antecedentes sociales en Chile.</p>
+                <a href="https://www.bcn.cl/leychile" target="_blank" class="text-teal-600 text-sm font-bold hover:underline">Ver fuente oficial en BCN →</a>
+              </div>
+            </li>
+            </ul>
+        </aside>
+      </div>
+
+      <div class="space-y-6">
+        <div class="bg-teal-900 rounded-3xl p-8 text-white shadow-xl sticky top-32">
+          <h3 class="text-xl font-bold mb-4">¿Necesitas esta asesoría?</h3>
+          <p class="text-teal-100 text-sm mb-8 leading-relaxed">
+            Reserva tu cupo hoy mismo para una atención personalizada y profesional.
+          </p>
+          
+          <a href="{% url 'home' %}#seccion-reserva" class="block w-full bg-teal-400 hover:bg-teal-300 text-teal-950 font-bold py-4 rounded-xl text-center transition-all shadow-lg active:scale-95">
+            Agendar Ahora
+          </a>
+          
+          <div class="mt-8 pt-8 border-t border-teal-800 space-y-4">
+            <div class="flex items-center gap-3 text-sm text-teal-200">
+              <span class="material-symbols-outlined text-teal-400">verified_user</span>
+              Secreto Profesional
+            </div>
+            <div class="flex items-center gap-3 text-sm text-teal-200">
+              <span class="material-symbols-outlined text-teal-400">schedule</span>
+              Atención en 24-48 hrs
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</main>
+{% endblock %}
