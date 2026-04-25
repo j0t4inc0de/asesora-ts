@@ -78,9 +78,15 @@
             Reserva tu cupo hoy mismo para una atención personalizada y profesional.
           </p>
           
-            <a href="{% url 'home' %}#seccion-reserva" class="relative font-label-md text-label-md bg-secondary text-white px-8 py-4 rounded-xl hover:bg-secondary/90 transition-colors shadow-ambient-low flex items-center justify-center gap-2 w-full mb-8">
-              Agendar Ahora
-              <span class="material-symbols-outlined text-sm">calendar_month</span>
+            <a
+            href="{% url 'home' %}#seccion-reserva"
+            class="relative group font-label-md text-label-md bg-sky-800 text-on-primary px-8 py-3.5 rounded-xl hover:bg-sky-800 transition-colors shadow-ambient-high overflow-hidden flex items-center justify-center"
+            >
+              <div class="absolute top-3 right-20 group-hover:top-12 group-hover:-right-12 z-10 w-40 h-40 rounded-full group-hover:scale-150 group-hover:opacity-50 duration-500 bg-sky-900"></div>
+              <div class="absolute top-3 right-20 group-hover:top-12 group-hover:-right-12 z-10 w-32 h-32 rounded-full group-hover:scale-150 group-hover:opacity-50 duration-500 bg-sky-800"></div>
+              <div class="absolute top-3 right-20 group-hover:top-12 group-hover:-right-12 z-10 w-24 h-24 rounded-full group-hover:scale-150 group-hover:opacity-50 duration-500 bg-sky-700"></div>
+              <div class="absolute top-3 right-20 group-hover:top-12 group-hover:-right-12 z-10 w-14 h-14 rounded-full group-hover:scale-150 group-hover:opacity-50 duration-500 bg-sky-600"></div>
+              <span class="z-10 relative">Agendar Cita</span>
             </a>
             
             <div class="pt-6 border-t border-sky-800/50 space-y-4">
