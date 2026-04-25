@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.core.mail import send_mail
 from django.conf import settings
-from .models import Servicio, Cliente, Cita, HorarioAtencion
+from .models import Servicio, Cliente, Cita, HorarioAtencion, SobreMi
 
 # Register your models here.
 @admin.register(Cita)
@@ -40,3 +40,4 @@ class CitaAdmin(admin.ModelAdmin):
 admin.site.register(Servicio)
 admin.site.register(Cliente)
 admin.site.register(HorarioAtencion)
+admin.site.register(SobreMi)

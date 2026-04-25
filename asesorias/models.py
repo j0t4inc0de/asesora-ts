@@ -2,6 +2,16 @@ from django.db import models
 from datetime import time
 
 # Create your models here.
+class SobreMi(models.Model):
+    nombre = models.CharField(max_length=100)
+    quienSoy = models.TextField()
+    ubicacion = models.CharField(max_length=100)
+    trabajemosJuntos = models.TextField()
+
+    def __str__(self):
+        return self.nombre
+
+
 class Servicio(models.Model):
     nombre = models.CharField(max_length=100)
     descripcion = models.TextField()
