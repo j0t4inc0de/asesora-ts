@@ -143,7 +143,7 @@
       <div class="grid lg:grid-cols-2">
         <!-- Informational Side -->
         <div
-          class="bg-primary-container text-on-primary-container p-12 lg:p-16 flex flex-col justify-between relative overflow-hidden"
+          class="bg-sky-900 text-white p-12 lg:p-16 flex flex-col justify-between relative overflow-hidden"
         >
           <div
             class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1555448248-2571daf6344b?auto=format&amp;fit=crop&amp;w=800&amp;q=80')] opacity-10 mix-blend-overlay"
@@ -203,7 +203,7 @@
           </div>
         </div>
         <!-- Form Side -->
-        <div class="p-12 lg:p-16 bg-surface-container-lowest">
+        <div class="p-12 lg:p-16 bg-sky-50">
           <form
             method="POST"
             action="{% url 'agendar_cita' %}"
@@ -335,7 +335,7 @@
                     <button
                       type="button"
                       data-datetime="{{ bloque.valor }}"
-                      class="btn-hora bg-slate-50 border border-teal-600 text-teal-700 font-semibold px-4 py-2 rounded-lg hover:bg-teal-600 hover:text-white transition-colors text-sm focus:outline-none"
+                      class="btn-hora bg-sky-100 border border-sky-600 text-sky-700 font-semibold px-4 py-2 rounded-lg hover:bg-sky-600 hover:text-white transition-colors text-sm focus:outline-none"
                     >
                       {{ bloque.etiqueta }}
                     </button>
