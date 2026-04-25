@@ -2,6 +2,8 @@ from django.shortcuts import redirect, render
 from django.core.mail import send_mail
 from django.conf import settings
 from django.utils import timezone
+from django.contrib import messages
+from django.urls import reverse
 from django.db import IntegrityError
 from datetime import date, timedelta, datetime
 from .models import Servicio, HorarioAtencion, Cita
@@ -34,13 +36,8 @@ def agendar_cita(request):
                 datetime.strptime(fecha_hora_str, '%Y-%m-%d %H:%M:%S'))
 
             if Cita.objects.filter(fecha_hora=fecha_hora_obj).exclude(estado='X').exists():
-                return render(request, 'index.html', {
-                    'form': form,  # Le devolvemos el form para que no pierda sus datos
-                    'servicios': Servicio.objects.all(),
-                    # Recarga las horas reales disponibles
-                    'slots_disponibles': obtener_slots_disponibles(),
-                    'error': "¡Ups! Esa hora acaba de ser reservada por otra persona mientras leías. Por favor, selecciona una nueva hora."
-                })
+                messages.error(request, "¡Ups! Esa hora acaba de ser reservada por otra persona mientras leías. Por favor, selecciona una nueva hora.")
+                return redirect(reverse('home') + '#seccion-reserva')
 
             try:
                 cliente = form.save()
@@ -55,12 +52,8 @@ def agendar_cita(request):
 
             except IntegrityError:
                 cliente.delete()
-                return render(request, 'index.html', {
-                    'form': form,
-                    'servicios': Servicio.objects.all(),
-                    'slots_disponibles': obtener_slots_disponibles(),
-                    'error': "Esa hora se ocupó en este preciso instante. Selecciona otra disponibilidad."
-                })
+                messages.error(request, "Esa hora se ocupó en este preciso instante. Selecciona otra disponibilidad.")
+                return redirect(reverse('home') + '#seccion-reserva')
 
             asunto = f"Nueva Cita Agendada: {datos['nombre']}"
             mensaje = f"""¡Hola! Has recibido una nueva reserva en AsesoraTS Chile:
@@ -74,17 +67,14 @@ HORA AGENDADA: {fecha_hora_obj.strftime('%d/%m/%Y a las %H:%M hrs')}
     • Servicio: {nombre_servicio}
     • Motivo: {datos['motivo_consulta']}
 """
-            send_mail(asunto, mensaje, settings.EMAIL_HOST_USER, [
-                      settings.EMAIL_HOST_USER], fail_silently=False)
+            send_mail(asunto, mensaje, settings.EMAIL_HOST_USER, [settings.EMAIL_HOST_USER], fail_silently=False)
 
+            messages.success(request, "¡Tu cita ha sido solicitada con éxito!")
             return redirect('confirmacion_solicitud')
+            
         else:
-            return render(request, 'index.html', {
-                'form': form,
-                'servicios': Servicio.objects.all(),
-                'slots_disponibles': obtener_slots_disponibles(),
-                'error': "Por favor, selecciona una hora y completa todos los campos correctamente."
-            })
+            messages.error(request, "Por favor, completa todos los campos correctamente y asegúrate de seleccionar una hora.")
+            return redirect(reverse('home') + '#seccion-reserva')
 
     return redirect('home')
 
