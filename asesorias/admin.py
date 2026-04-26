@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.core.mail import send_mail
 from django.conf import settings
-from .models import Servicio, Cliente, Cita, HorarioAtencion, SobreMi, Experiencia, Educacion
+from .models import Servicio, Cliente, Cita, HorarioAtencion, SobreMi, Experiencia, Educacion, Proyecto
 
 # Register your models here.
 
@@ -55,7 +55,11 @@ class EducacionInline(admin.TabularInline):
     model = Educacion
     extra = 1
 
+class ProyectoInline(admin.StackedInline):
+    model = Proyecto
+    extra = 0
+    classes = ['collapse']
 
 @admin.register(SobreMi)
 class SobreMiAdmin(admin.ModelAdmin):
-    inlines = [ExperienciaInline, EducacionInline]
+    inlines = [ExperienciaInline, EducacionInline, ProyectoInline]
