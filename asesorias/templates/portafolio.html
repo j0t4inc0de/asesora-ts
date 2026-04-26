@@ -2,6 +2,224 @@
 <html>
   <head>
     <title>Antonia Moyano - CV WEB</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "secondary-container": "#fe9d7a",
+              background: "#f8f9fa",
+              surface: "#f8f9fa",
+              "on-error": "#ffffff",
+              "tertiary-container": "#162f1d",
+              "on-secondary-fixed-variant": "#763217",
+              "surface-container-low": "#f3f4f5",
+              "tertiary-fixed-dim": "#b0ceb4",
+              "on-background": "#191c1d",
+              "inverse-primary": "#b7c8de",
+              "surface-container-highest": "#e1e3e4",
+              "on-tertiary-fixed-variant": "#334d38",
+              "primary-fixed": "#d2e4fb",
+              "surface-container-lowest": "#ffffff",
+              "surface-tint": "#4f6073",
+              "on-secondary-fixed": "#380d00",
+              "on-primary-fixed-variant": "#38485a",
+              "surface-dim": "#d9dadb",
+              "on-tertiary-container": "#7b9880",
+              "surface-container-high": "#e7e8e9",
+              "on-secondary": "#ffffff",
+              "secondary-fixed": "#ffdbcf",
+              "surface-variant": "#e1e3e4",
+              "on-primary": "#ffffff",
+              error: "#ba1a1a",
+              secondary: "#94492c",
+              "on-primary-container": "#8192a7",
+              "primary-fixed-dim": "#b7c8de",
+              "outline-variant": "#c4c6cd",
+              "surface-bright": "#f8f9fa",
+              "on-surface": "#191c1d",
+              tertiary: "#021a0a",
+              "on-surface-variant": "#44474c",
+              "tertiary-fixed": "#cceacf",
+              "on-error-container": "#93000a",
+              "on-tertiary-fixed": "#062010",
+              "on-tertiary": "#ffffff",
+              "on-primary-fixed": "#0b1d2d",
+              "secondary-fixed-dim": "#ffb59b",
+              primary: "#041627",
+              "inverse-on-surface": "#f0f1f2",
+              "error-container": "#ffdad6",
+              "surface-container": "#edeeef",
+              "on-secondary-container": "#773318",
+              outline: "#74777d",
+              "inverse-surface": "#2e3132",
+              "primary-container": "#1a2b3c",
+            },
+            borderRadius: {
+              DEFAULT: "0.25rem",
+              lg: "0.5rem",
+              xl: "0.75rem",
+              full: "9999px",
+            },
+            spacing: {
+              "2xl": "3rem",
+              sm: "0.5rem",
+              gutter: "1.5rem",
+              unit: "4px",
+              lg: "1.5rem",
+              xl: "2rem",
+              xs: "0.25rem",
+              md: "1rem",
+              "3xl": "4rem",
+              "container-max": "1280px",
+            },
+            fontFamily: {
+              manrope: ["Manrope", "sans-serif"],
+            },
+            fontSize: {
+              h1: [
+                "48px",
+                {
+                  lineHeight: "1.2",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "700",
+                },
+              ],
+              "label-md": [
+                "14px",
+                {
+                  lineHeight: "1.4",
+                  letterSpacing: "0.01em",
+                  fontWeight: "500",
+                },
+              ],
+              "body-lg": [
+                "18px",
+                {
+                  lineHeight: "1.6",
+                  fontWeight: "400",
+                },
+              ],
+              "body-md": [
+                "16px",
+                {
+                  lineHeight: "1.5",
+                  fontWeight: "400",
+                },
+              ],
+              caption: [
+                "12px",
+                {
+                  lineHeight: "1.4",
+                  fontWeight: "400",
+                },
+              ],
+              h3: [
+                "24px",
+                {
+                  lineHeight: "1.3",
+                  fontWeight: "600",
+                },
+              ],
+              h2: [
+                "36px",
+                {
+                  lineHeight: "1.2",
+                  letterSpacing: "-0.01em",
+                  fontWeight: "700",
+                },
+              ],
+            },
+            keyframes: {
+              shimmer: {
+                "0%": { transform: "translateX(-150%) skewX(-15deg)" },
+                "20%, 100%": { transform: "translateX(300%) skewX(-15deg)" },
+              },
+              sparkle: {
+                "0%, 100%": { opacity: "0", transform: "scale(0) rotate(0deg)" },
+                "50%": { opacity: "1", transform: "scale(1) rotate(15deg)" },
+              }
+            },
+            animation: {
+              shimmer: "shimmer 6s ease-in-out infinite",
+              sparkle: "sparkle 4s ease-in-out infinite",
+              "sparkle-delayed": "sparkle 4s ease-in-out infinite 2s",
+            },
+          },
+        },
+      };
+    </script>
+    <style type="text/tailwindcss">
+      @layer utilities {
+        .font-h1 {
+          font-family: "Manrope", sans-serif;
+        }
+        .text-h1 {
+          @apply text-[48px] leading-[1.2] tracking-[-0.02em] font-bold;
+        }
+        .font-h2 {
+          font-family: "Manrope", sans-serif;
+        }
+        .text-h2 {
+          @apply text-[36px] leading-[1.2] tracking-[-0.01em] font-bold;
+        }
+        .font-h3 {
+          font-family: "Manrope", sans-serif;
+        }
+        .text-h3 {
+          @apply text-[24px] leading-[1.3] font-semibold;
+        }
+        .font-body-lg {
+          font-family: "Manrope", sans-serif;
+        }
+        .text-body-lg {
+          @apply text-[18px] leading-[1.6] font-normal;
+        }
+        .font-body-md {
+          font-family: "Manrope", sans-serif;
+        }
+        .text-body-md {
+          @apply text-[16px] leading-[1.5] font-normal;
+        }
+        .font-label-md {
+          font-family: "Manrope", sans-serif;
+        }
+        .text-label-md {
+          @apply text-[14px] leading-[1.4] tracking-[0.01em] font-medium;
+        }
+        .font-caption {
+          font-family: "Manrope", sans-serif;
+        }
+        .text-caption {
+          @apply text-[12px] leading-[1.4] font-normal;
+        }
+
+        .shadow-ambient-low {
+          box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05);
+        }
+        .shadow-ambient-high {
+          box-shadow:
+            0 10px 15px -3px rgb(0 0 0 / 0.1),
+            0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+      }
+    </style>
   </head>
   <body>
     {% for item in portafolio %}
