@@ -61,18 +61,57 @@
     <body class="bg-sky-50 text-sky-900 min-h-screen flex flex-col relative overflow-x-hidden">
     
     <header class="z-50 p-6">
-        <nav class="flex items-center gap-6 fixed top-6 right-6">
+        <nav class="flex items-center gap-2 md:gap-3 fixed top-4 right-4 md:top-6 md:right-6 z-50">
+            {% for item in portafolio %}
+            {% if item.gmail %}
+            <div class="relative group flex items-center justify-center">
+                
+                <a href="mailto:{{ item.gmail }}"
+                class="flex items-center justify-center p-2 border-2 border-sky-600 rounded-xl hover:border-sky-800 transition-all bg-white/50 backdrop-blur-sm cursor-pointer">
+                    <svg class="w-6 h-6" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g id="SVGRepo_iconCarrier">
+                            <path d="M2 11.9556C2 8.47078 2 6.7284 2.67818 5.39739C3.27473 4.22661 4.22661 3.27473 5.39739 2.67818C6.7284 2 8.47078 2 11.9556 2H20.0444C23.5292 2 25.2716 2 26.6026 2.67818C27.7734 3.27473 28.7253 4.22661 29.3218 5.39739C30 6.7284 30 8.47078 30 11.9556V20.0444C30 23.5292 30 25.2716 29.3218 26.6026C28.7253 27.7734 27.7734 28.7253 26.6026 29.3218C25.2716 30 23.5292 30 20.0444 30H11.9556C8.47078 30 6.7284 30 5.39739 29.3218C4.22661 28.7253 3.27473 27.7734 2.67818 26.6026C2 25.2716 2 23.5292 2 20.0444V11.9556Z" fill="white"></path>
+                            <path d="M22.0515 8.52295L16.0644 13.1954L9.94043 8.52295V8.52421L9.94783 8.53053V15.0732L15.9954 19.8466L22.0515 15.2575V8.52295Z" fill="#EA4335"></path>
+                            <path d="M23.6231 7.38639L22.0508 8.52292V15.2575L26.9983 11.459V9.17074C26.9983 9.17074 26.3978 5.90258 23.6231 7.38639Z" fill="#FBBC05"></path>
+                            <path d="M22.0508 15.2575V23.9924H25.8428C25.8428 23.9924 26.9219 23.8813 26.9995 22.6513V11.459L22.0508 15.2575Z" fill="#34A853"></path>
+                            <path d="M9.94811 24.0001V15.0732L9.94043 15.0669L9.94811 24.0001Z" fill="#C5221F"></path>
+                            <path d="M9.94014 8.52404L8.37646 7.39382C5.60179 5.91001 5 9.17692 5 9.17692V11.4651L9.94014 15.0667V8.52404Z" fill="#C5221F"></path>
+                            <path d="M9.94043 8.52441V15.0671L9.94811 15.0734V8.53073L9.94043 8.52441Z" fill="#C5221F"></path>
+                            <path d="M5 11.4668V22.6591C5.07646 23.8904 6.15673 24.0003 6.15673 24.0003H9.94877L9.94014 15.0671L5 11.4668Z" fill="#4285F4"></path>
+                        </g>
+                    </svg>
+                </a>
+
+                <button onclick="copiarTextoDesdeBurbuja('{{ item.gmail }}', this)"
+                        class="absolute top-full left-1/2 -translate-x-1/2 mt-2 px-3 py-2 bg-sky-600 text-white text-sm font-medium rounded-lg shadow-lg whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none group-hover:pointer-events-auto z-10 before:absolute before:content-[''] before:w-2 before:h-2 before:bg-sky-600 before:rotate-45 before:-top-1 before:left-1/2 before:-translate-x-1/2">
+                    {{ item.gmail }}
+                </button>
+            </div>
+            {% endif %}
+            
             <a href="https://www.linkedin.com/in/antonia-moyano-silva-35183030b/"
-               target="_blank"
-               class="relative group flex items-center justify-center gap-2 font-label-md text-label-md border-2 border-[#0077b5] text-[#0077b5] px-4 py-2 rounded-xl hover:bg-[#0077b5] hover:text-white transition-all bg-white/50 backdrop-blur-sm">
-                <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+            target="_blank"
+            class="relative group flex items-center justify-center gap-2 font-label-md text-label-md border-2 border-[#0077b5] text-[#0077b5] p-2 md:px-4 md:py-2 rounded-xl hover:bg-[#0077b5] hover:text-white transition-all bg-white/50 backdrop-blur-sm">
+                <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
                     <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.239-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
                 </svg>
-                Ver Perfil Profesional
+                <span class="hidden md:block">Ver Perfil Profesional</span>
                 <div class="absolute top-full left-1/2 -translate-x-1/2 mt-2 px-3 py-2 bg-[#0077b5] text-white text-sm font-medium rounded-lg shadow-lg whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-10 before:absolute before:content-[''] before:w-2 before:h-2 before:bg-[#0077b5] before:rotate-45 before:-top-1 before:left-1/2 before:-translate-x-1/2">
                     ¡Mira mi perfil!
                 </div>
             </a>
+            
+            {% if item.cv %}
+                <a href="{{ item.cv.url }}"
+                download
+                class="relative group flex items-center justify-center gap-2 font-label-md text-label-md border-2 border-[#0077b5] text-[#0077b5] p-2 md:px-4 md:py-2 rounded-xl hover:bg-[#0077b5] hover:text-white transition-all bg-white/50 backdrop-blur-sm">
+                    <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
+                        <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
+                    </svg>
+                    <span class="hidden md:block">Descargar CV</span>
+                </a>
+            {% endif %}
+            {% endfor %}
         </nav>
     </header>
 
@@ -203,3 +242,20 @@
     {% endfor %}
   </body>
 </html>
+
+<script>
+    /* Utiliza la API del portapapeles para copiar el texto y actualiza el estado visual de la burbuja */
+    function copiarTextoDesdeBurbuja(correo, elementoBurbuja) {
+        navigator.clipboard.writeText(correo).then(function() {
+            var textoOriginal = correo;
+            
+            elementoBurbuja.innerText = 'Copiado en el portapapeles';
+            
+            setTimeout(function() {
+                elementoBurbuja.innerText = textoOriginal;
+            }, 2000);
+        }).catch(function(err) {
+            console.error('Error al copiar el correo: ', err);
+        });
+    }
+</script>

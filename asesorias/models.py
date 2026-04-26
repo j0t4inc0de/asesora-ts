@@ -9,6 +9,8 @@ class SobreMi(models.Model):
     quienSoy = models.TextField()
     ubicacion = models.CharField(max_length=100)
     trabajemosJuntos = models.TextField(max_length=450)
+    cv = models.FileField(upload_to='cvs/', null=True, blank=True)
+    gmail = models.EmailField(max_length=254, null=True, blank=True)
 
     def __str__(self):
         return self.nombre

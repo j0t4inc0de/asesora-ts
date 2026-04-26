@@ -25,7 +25,6 @@ def home(request):
 
 
 def ir_portafolio(request):
-    pass
     portafolio = SobreMi.objects.all()
 
     return render(request, 'portafolio.html', {'portafolio': portafolio})
