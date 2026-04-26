@@ -1,16 +1,17 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-<head>
+  <head>
     <title>Antonia Moyano - CV WEB</title>
-</head>
-<body>
+  </head>
+  <body>
     {% for item in portafolio %}
-        <h1>{{ item.nombre }}</h1>
-        <p>{{ item.quienSoy }}</p>
-        <p>{{ item.ubicacion }}</p>
-        <p>{{ item.trabajemosJuntos }}</p>
+    <h1>Hola mi el nombre es {{ item.nombre }}.</h1>
+    <p>{{ item.quienSoy }} con residencia en {{ item.ubicacion }}</p>
+
+    <h1>Trabajemos juntos.</h1>
+    <p>{{ item.trabajemosJuntos }}</p>
     {% empty %}
-            <li>No has creado el portafolio aún</li>
+    <li>No has creado el portafolio aún</li>
     {% endfor %}
-</body>
+  </body>
 </html>
