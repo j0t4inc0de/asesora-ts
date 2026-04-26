@@ -2,6 +2,8 @@ from django.db import models
 from datetime import time
 
 # Create your models here.
+
+
 class SobreMi(models.Model):
     nombre = models.CharField(max_length=100)
     quienSoy = models.TextField()
@@ -35,6 +37,20 @@ class Educacion(models.Model):
 
     class Meta:
         ordering = ['-fecha_obtencion']
+
+
+class Proyecto(models.Model):
+    persona = models.ForeignKey(
+        'SobreMi', on_delete=models.CASCADE, related_name='proyectos')
+    titulo = models.CharField(max_length=200)
+    descripcion = models.TextField()
+    institucion = models.CharField(max_length=200, blank=True, null=True)
+    link = models.URLField(blank=True, null=True)
+    fecha_inicio = models.DateField()
+    fecha_fin = models.DateField(null=True, blank=True)
+
+    class Meta:
+        ordering = ['-fecha_inicio']
 
 
 class Servicio(models.Model):
