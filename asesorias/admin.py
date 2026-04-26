@@ -1,17 +1,20 @@
 from django.contrib import admin
 from django.core.mail import send_mail
 from django.conf import settings
-from .models import Servicio, Cliente, Cita, HorarioAtencion, SobreMi
+from .models import Servicio, Cliente, Cita, HorarioAtencion, SobreMi, Experiencia, Educacion
 
 # Register your models here.
+
+
 @admin.register(Cita)
 class CitaAdmin(admin.ModelAdmin):
-    list_display = ('fecha_hora', 'cliente', 'servicio', 'estado', 'estado_pago')
+    list_display = ('fecha_hora', 'cliente',
+                    'servicio', 'estado', 'estado_pago')
     list_filter = ('estado', 'estado_pago', 'servicio', 'fecha_hora')
-    list_select_related = ('cliente', 'servicio') 
+    list_select_related = ('cliente', 'servicio')
 
     def save_model(self, request, obj, form, change):
-        if change: # Si se está modificando una cita existente
+        if change:  # Si se está modificando una cita existente
             cita_anterior = Cita.objects.get(pk=obj.pk)
             # Si el estado cambió a 'Cancelada' ('X')
             if cita_anterior.estado != 'X' and obj.estado == 'X':
@@ -29,15 +32,30 @@ class CitaAdmin(admin.ModelAdmin):
                 AsesoraTS Chile.
                 """
                 send_mail(
-                    asunto, 
-                    mensaje, 
+                    asunto,
+                    mensaje,
                     settings.EMAIL_HOST_USER,
-                    [obj.cliente.email], 
+                    [obj.cliente.email],
                     fail_silently=False,
                 )
         super().save_model(request, obj, form, change)
 
+
 admin.site.register(Servicio)
 admin.site.register(Cliente)
 admin.site.register(HorarioAtencion)
-admin.site.register(SobreMi)
+
+
+class ExperienciaInline(admin.TabularInline):
+    model = Experiencia
+    extra = 1
+
+
+class EducacionInline(admin.TabularInline):
+    model = Educacion
+    extra = 1
+
+
+@admin.register(SobreMi)
+class SobreMiAdmin(admin.ModelAdmin):
+    inlines = [ExperienciaInline, EducacionInline]
