@@ -6,7 +6,7 @@ from django.contrib import messages
 from django.urls import reverse
 from django.db import IntegrityError
 from datetime import date, timedelta, datetime
-from .models import Servicio, HorarioAtencion, Cita
+from .models import Servicio, HorarioAtencion, Cita, SobreMi
 from .forms import FormularioDiagnostico
 
 
@@ -22,6 +22,13 @@ def home(request):
         'hoy': hoy,
         'slots_disponibles': slots
     })
+
+
+def ir_portafolio(request):
+    pass
+    portafolio = SobreMi.objects.all()
+
+    return render(request, 'portafolio.html', {'portafolio': portafolio})
 
 
 def detalle_servicio(request, servicio_id):
