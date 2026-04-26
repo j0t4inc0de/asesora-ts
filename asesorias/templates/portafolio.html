@@ -1,10 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Lista de Productos</title>
+    <title>Antonia Moyano - CV WEB</title>
 </head>
 <body>
-    <h1>Catálogo de Productos</h1>
-
+    {% for item in portafolio %}
+        <h1>{{ item.nombre }}</h1>
+        <p>{{ item.quienSoy }}</p>
+        <p>{{ item.ubicacion }}</p>
+        <p>{{ item.trabajemosJuntos }}</p>
+    {% empty %}
+            <li>No has creado el portafolio aún</li>
+    {% endfor %}
 </body>
 </html>
