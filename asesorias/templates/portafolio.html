@@ -74,24 +74,26 @@
         <div>
           {% for item in portafolio %}
           <h1
-            class="text-5xl md:text-7xl font-bold text-sky-950 leading-tight mb-6"
+            class="text-4xl md:text-5xl font-bold text-sky-950 leading-tight mb-4"
           >
             Hola, mi<br />nombre es
             <span class="text-sky-700">{{ item.nombre }}</span>.
           </h1>
+
           <p
-            class="text-xl md:text-2xl text-sky-800 font-medium leading-relaxed max-w-md mb-8"
+            class="text-lg md:text-xl text-sky-800 font-medium leading-relaxed max-w-md mb-8"
           >
             {{ item.quienSoy }} con residencia en {{ item.ubicacion }}.
           </p>
 
-          <h1
-            class="text-5xl md:text-7xl font-bold text-sky-950 leading-tight mb-6"
+          <h2
+            class="text-4xl md:text-5xl font-bold text-sky-950 leading-tight mb-4"
           >
             Trabajemos juntos.
-          </h1>
+          </h2>
+
           <p
-            class="text-xl md:text-2xl text-sky-800 font-medium leading-relaxed max-w-md mb-8"
+            class="text-base md:text-lg text-sky-800 font-medium leading-relaxed max-w-md mb-8"
           >
             {{ item.trabajemosJuntos }}
           </p>

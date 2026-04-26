@@ -6,7 +6,7 @@ class SobreMi(models.Model):
     nombre = models.CharField(max_length=100)
     quienSoy = models.TextField()
     ubicacion = models.CharField(max_length=100)
-    trabajemosJuntos = models.TextField()
+    trabajemosJuntos = models.TextField(max_length=450)
 
     def __str__(self):
         return self.nombre
