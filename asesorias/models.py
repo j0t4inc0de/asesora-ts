@@ -91,6 +91,8 @@ class Cita(models.Model):
         max_length=2, choices=ESTADOS_PAGO, default='NO')
     transaccion_id = models.CharField(
         max_length=100, blank=True, null=True, help_text="ID de Webpay/MercadoPago")
+    mp_preference_id = models.CharField(
+        max_length=100, blank=True, null=True, help_text="ID de la preferencia de Mercado Pago")
 
     def __str__(self):
         return f"Cita: {self.cliente.nombre} - {self.fecha_hora.strftime('%d/%m/%Y %H:%M')}"

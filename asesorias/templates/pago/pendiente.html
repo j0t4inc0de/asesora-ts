@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<main>
+  <section class="min-h-[80vh] flex items-center justify-center px-4 py-20 md:py-28">
+    <div class="w-full max-w-lg">
+
+      <!-- Tarjeta principal -->
+      <div class="bg-white rounded-[2rem] shadow-2xl overflow-hidden border border-slate-100">
+
+        <!-- Franja superior amber-600 -->
+        <div class="bg-amber-600 px-8 pt-10 pb-16 relative overflow-hidden text-center">
+          <!-- Círculos decorativos de fondo -->
+          <div class="absolute -top-10 -right-10 w-40 h-40 rounded-full bg-amber-700 opacity-50"></div>
+          <div class="absolute -bottom-6 -left-8 w-32 h-32 rounded-full bg-amber-700 opacity-40"></div>
+
+          <!-- Ícono de éxito animado -->
+          <div class="relative z-10 inline-flex items-center justify-center w-20 h-20 rounded-full bg-white/10 border-2 border-white/20 mx-auto mb-5">
+            <div class="flex items-center justify-center w-14 h-14 rounded-full bg-amber-300/20">
+              <span
+                class="material-symbols-outlined text-amber-100"
+                style="font-size: 36px; font-variation-settings: 'FILL' 1;"
+              >pending_actions</span>
+            </div>
+          </div>
+
+          <!-- Pill badge -->
+          <div class="relative z-10 inline-flex items-center gap-2 bg-white/10 border border-white/20 text-amber-50 px-4 py-1.5 rounded-full mb-4 font-label-md text-label-md">
+            <span class="material-symbols-outlined text-amber-200" style="font-size:14px; font-variation-settings:'FILL' 1;">hourglass_top</span>
+            Procesando Pago
+          </div>
+
+          <!-- Título -->
+          <h1 class="relative z-10 font-manrope font-bold text-white leading-tight" style="font-size: clamp(28px, 5vw, 38px);">
+            Tu pago está
+            <span class="relative inline-block text-amber-200">
+              pendiente
+              <svg class="absolute -bottom-1 left-0 w-full overflow-visible" viewBox="0 0 120 7" fill="none" preserveAspectRatio="none">
+                <path d="M2 5 C30 2, 60 1, 90 3 S110 6, 118 5" stroke="#fde68a" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+              </svg>
+            </span>
+          </h1>
+        </div>
+
+        <!-- Cuerpo de la tarjeta -->
+        <div class="px-8 pt-8 pb-10 -mt-8">
+
+          <!-- Chip de estado flotante -->
+          <div class="flex justify-center mb-6">
+            <div class="inline-flex items-center gap-2 bg-amber-50 border border-amber-200 text-amber-700 px-4 py-1.5 rounded-full font-label-md text-label-md shadow-sm">
+              <span class="relative flex h-2 w-2">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-2 w-2 bg-amber-500"></span>
+              </span>
+              Cita pre-agendada
+            </div>
+          </div>
+
+          <!-- Descripción -->
+          <p class="font-body-md text-body-md text-on-surface-variant text-center mb-8 leading-relaxed">
+            Tu pago está siendo revisado por Mercado Pago. Recibirás un correo electrónico de confirmación una vez que el pago sea aprobado, y la trabajadora social se pondrá en contacto contigo.
+          </p>
+
+          <!-- Botón volver -->
+          <a
+            href="{% url 'home' %}"
+            class="relative group w-full font-label-md text-label-md bg-amber-600 text-white py-3.5 rounded-xl hover:bg-amber-700 transition-colors shadow-ambient-high overflow-hidden flex items-center justify-center"
+          >
+            <span class="z-10 relative flex items-center gap-2">
+              <span class="material-symbols-outlined" style="font-size:18px;">arrow_back</span>
+              Volver al Inicio
+            </span>
+          </a>
+
+          <!-- Footer de la tarjeta -->
+          <p class="font-caption text-caption text-center text-slate-400 mt-5">
+            AsesoraTS Chile — Asesoría Profesional con Sentido Humano
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</main>
+{% endblock %}

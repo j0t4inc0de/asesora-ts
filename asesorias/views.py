@@ -8,8 +8,10 @@ from django.db import IntegrityError
 from datetime import date, timedelta, datetime
 from .models import Servicio, HorarioAtencion, Cita, SobreMi
 from .forms import FormularioDiagnostico
-
-
+import mercadopago
+from django.views.decorators.csrf import csrf_exempt
+from django.http import HttpResponse
+import json
 def home(request):
     servicios = Servicio.objects.all()
     form = FormularioDiagnostico()
@@ -55,11 +57,12 @@ def agendar_cita(request):
                 cliente = form.save()
                 servicio_obj = Servicio.objects.get(nombre=nombre_servicio)
 
-                Cita.objects.create(
+                cita = Cita.objects.create(
                     cliente=cliente,
                     servicio=servicio_obj,
                     fecha_hora=fecha_hora_obj,
-                    estado='P'  # Pendiente
+                    estado='P',  # Pendiente
+                    estado_pago='NO' # No pagado
                 )
 
             except IntegrityError:
@@ -68,23 +71,49 @@ def agendar_cita(request):
                     request, "Esa hora se ocupó en este preciso instante. Selecciona otra disponibilidad.")
                 return redirect(reverse('home') + '#seccion-reserva')
 
-            asunto = f"Nueva Cita Agendada: {datos['nombre']}"
-            mensaje = f"""¡Hola! Has recibido una nueva reserva en AsesoraTS Chile:
-
-HORA AGENDADA: {fecha_hora_obj.strftime('%d/%m/%Y a las %H:%M hrs')}
-            
-    • Cliente: 
-        NOMBRES: {datos['nombre']}
-        RUT: {datos['rut']}
-    • Teléfono: {datos['telefono']}
-    • Servicio: {nombre_servicio}
-    • Motivo: {datos['motivo_consulta']}
-"""
-            send_mail(asunto, mensaje, settings.EMAIL_HOST_USER, [
-                      settings.EMAIL_HOST_USER], fail_silently=False)
-
-            messages.success(request, "¡Tu cita ha sido solicitada con éxito!")
-            return redirect('confirmacion_solicitud')
+            # --- INTEGRACION MERCADO PAGO ---
+            try:
+                sdk = mercadopago.SDK(settings.MP_ACCESS_TOKEN)
+                
+                # Usar SITE_URL para entornos locales o producción
+                site_url = settings.SITE_URL
+                
+                preference_data = {
+                    "items": [
+                        {
+                            "title": f"Asesoría: {servicio_obj.nombre}",
+                            "quantity": 1,
+                            "unit_price": servicio_obj.precio,
+                            "currency_id": "CLP",
+                        }
+                    ],
+                    "back_urls": {
+                        "success": f"{site_url}{reverse('pago_exito')}",
+                        "failure": f"{site_url}{reverse('pago_fallo')}",
+                        "pending": f"{site_url}{reverse('pago_pendiente')}",
+                    },
+                    "auto_return": "approved",
+                    "external_reference": str(cita.id),
+                    "notification_url": f"{site_url}{reverse('mp_webhook')}",
+                }
+                
+                preference_response = sdk.preference().create(preference_data)
+                preference = preference_response["response"]
+                
+                # Guardar el preference_id en la cita
+                cita.mp_preference_id = preference["id"]
+                cita.save()
+                
+                # Redirigir al Checkout Pro
+                url_checkout = preference["sandbox_init_point"] if settings.DEBUG else preference["init_point"]
+                return redirect(url_checkout)
+                
+            except Exception as e:
+                # Si falla Mercado Pago, cancelar cita y avisar
+                cita.estado = 'X'
+                cita.save()
+                messages.error(request, "Hubo un error al conectar con el sistema de pago. Por favor, intenta de nuevo más tarde.")
+                return redirect(reverse('home') + '#seccion-reserva')
 
         else:
             messages.error(
@@ -94,8 +123,112 @@ HORA AGENDADA: {fecha_hora_obj.strftime('%d/%m/%Y a las %H:%M hrs')}
     return redirect('home')
 
 
-def confirmacion_solicitud(request):
-    return render(request, 'confirmacion.html')
+def _enviar_email_confirmacion(cita):
+    cliente = cita.cliente
+    servicio = cita.servicio
+    fecha_hora_obj = cita.fecha_hora
+    
+    asunto = f"Nueva Cita Agendada y Pagada: {cliente.nombre}"
+    mensaje = f"""¡Hola! Has recibido una nueva reserva pagada en AsesoraTS Chile:
+
+HORA AGENDADA: {fecha_hora_obj.strftime('%d/%m/%Y a las %H:%M hrs')}
+    
+    • Cliente: 
+        NOMBRES: {cliente.nombre}
+        RUT: {cliente.rut}
+    • Teléfono: {cliente.telefono}
+    • Servicio: {servicio.nombre}
+    • Motivo: {cliente.motivo_consulta}
+    • Transacción MP: {cita.transaccion_id}
+"""
+    try:
+        send_mail(asunto, mensaje, settings.EMAIL_HOST_USER, [
+                  settings.EMAIL_HOST_USER], fail_silently=False)
+    except Exception as e:
+        print(f"Error al enviar correo: {e}")
+
+
+def pago_exito(request):
+    payment_id = request.GET.get('payment_id')
+    external_ref = request.GET.get('external_reference')
+    
+    if external_ref:
+        cita = Cita.objects.filter(id=external_ref).first()
+        if cita and cita.estado_pago != 'PA':
+            cita.estado_pago = 'PA'
+            cita.estado = 'C' # Confirmada
+            cita.transaccion_id = payment_id
+            cita.save()
+            _enviar_email_confirmacion(cita)
+    
+    return render(request, 'pago/exito.html')
+
+
+def pago_fallo(request):
+    external_ref = request.GET.get('external_reference')
+    if external_ref:
+        cita = Cita.objects.filter(id=external_ref).first()
+        if cita and cita.estado_pago != 'PA':
+            cita.estado_pago = 'NO'
+            cita.estado = 'X' # Cancelada
+            cita.save()
+            
+    return render(request, 'pago/fallo.html')
+
+
+def pago_pendiente(request):
+    external_ref = request.GET.get('external_reference')
+    if external_ref:
+        cita = Cita.objects.filter(id=external_ref).first()
+        if cita and cita.estado_pago != 'PA':
+            cita.estado_pago = 'PE'
+            cita.save()
+            
+    return render(request, 'pago/pendiente.html')
+
+
+@csrf_exempt
+def mercadopago_webhook(request):
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+            
+            # Mercado Pago envía 'action' y 'type' en las IPN/Webhooks
+            if data.get('type') == 'payment' or data.get('topic') == 'payment':
+                payment_id = data.get('data', {}).get('id')
+                if not payment_id and 'id' in data: # IPN a veces manda el id en raiz
+                    payment_id = data['id']
+                    
+                if payment_id:
+                    sdk = mercadopago.SDK(settings.MP_ACCESS_TOKEN)
+                    payment_info = sdk.payment().get(payment_id)
+                    payment = payment_info['response']
+                    
+                    external_ref = payment.get('external_reference')
+                    status = payment.get('status')
+                    
+                    if external_ref:
+                        cita = Cita.objects.filter(id=external_ref).first()
+                        if cita:
+                            cita.transaccion_id = str(payment_id)
+                            if status == 'approved':
+                                if cita.estado_pago != 'PA':
+                                    cita.estado_pago = 'PA'
+                                    cita.estado = 'C'
+                                    _enviar_email_confirmacion(cita)
+                            elif status in ('pending', 'in_process', 'authorized'):
+                                cita.estado_pago = 'PE'
+                            elif status in ('rejected', 'cancelled', 'refunded', 'charged_back'):
+                                cita.estado_pago = 'NO'
+                                cita.estado = 'X'
+                            cita.save()
+                            
+            return HttpResponse(status=200)
+        except Exception as e:
+            print(f"Webhook error: {e}")
+            return HttpResponse(status=400)
+    
+    return HttpResponse(status=405)
 
 
 def obtener_slots_disponibles():

@@ -28,6 +28,8 @@ DEBUG = os.getenv('DEBUG') == 'True'
 
 ALLOWED_HOSTS = ['asesora-moyano.wearesamod.com', 'localhost', '127.0.0.1']
 
+MP_ACCESS_TOKEN = os.getenv('MP_ACCESS_TOKEN', '')
+SITE_URL = 'https://asesora-moyano.wearesamod.com' if not DEBUG else 'http://localhost:8000'
 
 # Application definition
 

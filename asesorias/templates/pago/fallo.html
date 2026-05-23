@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<main>
+  <section class="min-h-[80vh] flex items-center justify-center px-4 py-20 md:py-28">
+    <div class="w-full max-w-lg">
+
+      <!-- Tarjeta principal -->
+      <div class="bg-white rounded-[2rem] shadow-2xl overflow-hidden border border-slate-100">
+
+        <!-- Franja superior rose-700 -->
+        <div class="bg-rose-700 px-8 pt-10 pb-16 relative overflow-hidden text-center">
+          <!-- Círculos decorativos de fondo -->
+          <div class="absolute -top-10 -right-10 w-40 h-40 rounded-full bg-rose-800 opacity-50"></div>
+          <div class="absolute -bottom-6 -left-8 w-32 h-32 rounded-full bg-rose-800 opacity-40"></div>
+
+          <!-- Ícono de fallo animado -->
+          <div class="relative z-10 inline-flex items-center justify-center w-20 h-20 rounded-full bg-white/10 border-2 border-white/20 mx-auto mb-5">
+            <div class="flex items-center justify-center w-14 h-14 rounded-full bg-rose-300/20">
+              <span
+                class="material-symbols-outlined text-rose-200"
+                style="font-size: 36px; font-variation-settings: 'FILL' 1;"
+              >error</span>
+            </div>
+          </div>
+
+          <!-- Pill badge -->
+          <div class="relative z-10 inline-flex items-center gap-2 bg-white/10 border border-white/20 text-rose-100 px-4 py-1.5 rounded-full mb-4 font-label-md text-label-md">
+            <span class="material-symbols-outlined text-rose-200" style="font-size:14px; font-variation-settings:'FILL' 1;">cancel</span>
+            Pago Rechazado
+          </div>
+
+          <!-- Título -->
+          <h1 class="relative z-10 font-manrope font-bold text-white leading-tight" style="font-size: clamp(28px, 5vw, 38px);">
+            El pago fue
+            <span class="relative inline-block text-rose-200">
+              rechazado
+              <svg class="absolute -bottom-1 left-0 w-full overflow-visible" viewBox="0 0 120 7" fill="none" preserveAspectRatio="none">
+                <path d="M2 5 C30 2, 60 1, 90 3 S110 6, 118 5" stroke="#fecdd3" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+              </svg>
+            </span>
+          </h1>
+        </div>
+
+        <!-- Cuerpo de la tarjeta -->
+        <div class="px-8 pt-8 pb-10 -mt-8">
+
+          <!-- Chip de estado flotante -->
+          <div class="flex justify-center mb-6">
+            <div class="inline-flex items-center gap-2 bg-rose-50 border border-rose-200 text-rose-700 px-4 py-1.5 rounded-full font-label-md text-label-md shadow-sm">
+              <span class="material-symbols-outlined text-rose-600" style="font-size: 16px;">warning</span>
+              La cita no ha sido agendada
+            </div>
+          </div>
+
+          <!-- Descripción -->
+          <p class="font-body-md text-body-md text-on-surface-variant text-center mb-8 leading-relaxed">
+            Ocurrió un problema al procesar tu pago con Mercado Pago. Esto puede deberse a un problema con tu tarjeta o a fondos insuficientes.
+          </p>
+
+          <!-- Botón reintentar -->
+          <a
+            href="{% url 'home' %}#seccion-reserva"
+            class="relative group w-full font-label-md text-label-md bg-rose-600 text-white py-3.5 rounded-xl hover:bg-rose-700 transition-colors shadow-ambient-high overflow-hidden flex items-center justify-center mb-3"
+          >
+            <span class="z-10 relative flex items-center gap-2">
+              <span class="material-symbols-outlined" style="font-size:18px;">refresh</span>
+              Intentar nuevamente
+            </span>
+          </a>
+
+          <!-- Botón volver -->
+          <a
+            href="{% url 'home' %}"
+            class="w-full font-label-md text-label-md bg-white border-2 border-slate-200 text-slate-600 py-3 rounded-xl hover:bg-slate-50 transition-colors flex items-center justify-center gap-2"
+          >
+            Volver al Inicio
+          </a>
+
+          <!-- Footer de la tarjeta -->
+          <p class="font-caption text-caption text-center text-slate-400 mt-5">
+            AsesoraTS Chile — Asesoría Profesional con Sentido Humano
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</main>
+{% endblock %}
