@@ -1,23 +1,40 @@
 {% extends 'base.html' %} {% block content %}
 <main>
   <!-- Hero Section -->
-  <section
-    class="relative pt-20 pb-20 px-4 md:px-8 max-w-container-max mx-auto overflow-hidden"
-  >
-    <div class="grid md:grid-cols-12 gap-8 items-center">
-      <div class="md:col-span-5 z-10 flex flex-col gap-6">
-        <span
-          class="font-label-md text-label-md text-secondary tracking-widest uppercase bg-secondary-fixed/30 inline-block w-max px-3 py-1 rounded-full"
-          >Atención Especializada</span
-        >
-        <h1 class="font-h1 text-h1 text-primary">
-          Asesoría Profesional con Sentido Humano
+  <section class="relative pt-20 md:pt-28 pb-12 md:pb-20 px-4 md:px-8 max-w-container-max mx-auto overflow-visible">
+
+
+    <div class="grid md:grid-cols-12 gap-10 items-center">
+
+      <!-- ══════════════════════ COLUMNA IZQUIERDA ══════════════════════ -->
+      <div class="md:col-span-5 z-10 flex flex-col gap-7">
+
+        <!-- Badge superior -->
+        <div class="inline-flex items-center gap-2 bg-sky-50 border border-sky-200 text-sky-700 px-4 py-1.5 rounded-full w-max shadow-sm font-label-md text-label-md">
+          <span class="material-symbols-outlined text-sky-500" style="font-size:16px; font-variation-settings:'FILL' 1;">workspace_premium</span>
+          Trabajadora Social Certificada
+        </div>
+
+        <!-- Título con acento SVG -->
+        <h1 class="font-h1 text-primary leading-[1.15] text-[32px] sm:text-[40px] md:text-[48px]">
+          Asesoría Profesional con
+          <span class="relative inline-block text-sky-800">
+            Sentido Humano
+            <!-- Subrayado curvo SVG -->
+            <svg class="absolute -bottom-2 left-0 w-full overflow-visible" viewBox="0 0 260 10" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+              <path d="M2 7 C60 2, 130 1, 200 4 S240 8, 258 7" stroke="#38bdf8" stroke-width="3" stroke-linecap="round" fill="none"/>
+            </svg>
+          </span>
         </h1>
+
+        <!-- Descripción -->
         <p class="font-body-lg text-body-lg text-on-surface-variant max-w-md" style="text-align: justify;">
           Acompañamiento experto y cálido para guiar tus procesos sociales.
           Diseño soluciones con rigor metodológico y una mirada empática.
         </p>
-        <div class="flex flex-col sm:flex-row gap-4 mt-4">
+
+        <!-- ── BOTONES (conservados intactos) ── -->
+        <div class="flex flex-col sm:flex-row gap-4 mt-2">
           <a
             href="#seccion-reserva"
             class="relative group font-label-md text-label-md bg-sky-800 text-on-primary px-8 py-3.5 rounded-xl hover:bg-sky-800 transition-colors shadow-ambient-high overflow-hidden flex items-center justify-center"
@@ -26,7 +43,9 @@
             <div class="absolute top-3 right-20 group-hover:top-12 group-hover:-right-12 z-10 w-32 h-32 rounded-full group-hover:scale-150 group-hover:opacity-50 duration-500 bg-sky-800"></div>
             <div class="absolute top-3 right-20 group-hover:top-12 group-hover:-right-12 z-10 w-24 h-24 rounded-full group-hover:scale-150 group-hover:opacity-50 duration-500 bg-sky-700"></div>
             <div class="absolute top-3 right-20 group-hover:top-12 group-hover:-right-12 z-10 w-14 h-14 rounded-full group-hover:scale-150 group-hover:opacity-50 duration-500 bg-sky-600"></div>
-            <span class="z-10 relative">Agendar Cita</span>
+            <span class="z-10 relative flex items-center gap-2">
+              Agendar Cita
+            </span>
           </a>
 
           <a
@@ -36,120 +55,161 @@
             Conocer Servicios
           </a>
         </div>
-        <div
-          class="flex items-center gap-4 mt-8 pt-8 border-t border-surface-variant"
-        >
+
+        <!-- ── Prueba social ── -->
+        <div class="flex items-center gap-4 pt-6 border-t border-surface-variant">
           <div class="flex -space-x-3">
-            <img
-              alt="Cliente satisfecho"
-              class="w-10 h-10 rounded-full border-2 border-background object-cover"
-              data-alt="Portrait of a smiling professional woman with warm natural lighting"
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuDxHXGJlQRi5iTk7MYgE53W9z0_QfmoxwIUMN5XxUU8vF_aNMhTUdGa893PhzBdbtVEmfDDXm6igHBlz7r8ToobmJpy-8oae7SereeQ9Zzfx7_o1VbILrIsdWc5N--yOE4F1Oe9qB5MHhkla6DoffI2OVdfbEh4_V8s3r9OZnjW7Eg3inrqr8xi390OTefGN3grW0UxuPkMHWJf7a1Prl1USZcy6rw2VwQDO5WFBIxSsEzlRBmg_0uNbdN9y9zR7fPJo7703Jo8NNE"
-            />
-            <img
-              alt="Cliente satisfecho"
-              class="w-10 h-10 rounded-full border-2 border-background object-cover"
-              data-alt="Portrait of a mature man with a gentle smile in soft daylight"
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuBTjxoiAfz5IkD01IEXqdQqX-AMc_4Zo7rWHGZCnUzLa2LOnF5cvahaWrYhXcAGULMg_Yh7tyb9Y6o2gsOdLXvbTN5LLq52kh91TuM2W8QTL1fb_ooSkCnRP0STqPSvstz5jx6U2oXugenNlvAEa1rc58EkQHPk8DvRcGM78djQaUsuC_EBKT6e0c8H0mD0zy98EJ0MQMx4ktPRMWPcj7JIax7ziM99_NR3zEyPFgZv6OI2PPxcD4R_ZZ5DRpTGhrzWsY6ukx9sWWE"
-            />
-            <img
-              alt="Cliente satisfecho"
-              class="w-10 h-10 rounded-full border-2 border-background object-cover"
-              data-alt="Portrait of a young woman looking confident in a bright indoor setting"
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuCmTKITJqrhmslUJL0L8vY4QNF-UkBVlh5p-i93as--iV1JoMqgT8wxB5WFFF2u9HNwZE0FwTsFyzy_xxRYc2uzYct7lePnY-BHTwdeT0TYKFkRSP08alc6Bz_RY1cF4melGrCcSNFoM--aH7I1tgTh15eb5ChXPnDfI83wsOp6lbECgvJ5JA4BRJQN-EKFmH2RvmdjjHbqBOiOQ72avb_2oG4m2e3xIE_8fPiSCTC3ZkTV5SYEFGQIsCXDqmJL12gj5bnXp2pBXVA"
-            />
+            <img alt="Cliente satisfecho" class="w-10 h-10 rounded-full border-2 border-white object-cover shadow-sm"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuDxHXGJlQRi5iTk7MYgE53W9z0_QfmoxwIUMN5XxUU8vF_aNMhTUdGa893PhzBdbtVEmfDDXm6igHBlz7r8ToobmJpy-8oae7SereeQ9Zzfx7_o1VbILrIsdWc5N--yOE4F1Oe9qB5MHhkla6DoffI2OVdfbEh4_V8s3r9OZnjW7Eg3inrqr8xi390OTefGN3grW0UxuPkMHWJf7a1Prl1USZcy6rw2VwQDO5WFBIxSsEzlRBmg_0uNbdN9y9zR7fPJo7703Jo8NNE"/>
+            <img alt="Cliente satisfecho" class="w-10 h-10 rounded-full border-2 border-white object-cover shadow-sm"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuBTjxoiAfz5IkD01IEXqdQqX-AMc_4Zo7rWHGZCnUzLa2LOnF5cvahaWrYhXcAGULMg_Yh7tyb9Y6o2gsOdLXvbTN5LLq52kh91TuM2W8QTL1fb_ooSkCnRP0STqPSvstz5jx6U2oXugenNlvAEa1rc58EkQHPk8DvRcGM78djQaUsuC_EBKT6e0c8H0mD0zy98EJ0MQMx4ktPRMWPcj7JIax7ziM99_NR3zEyPFgZv6OI2PPxcD4R_ZZ5DRpTGhrzWsY6ukx9sWWE"/>
+            <img alt="Cliente satisfecho" class="w-10 h-10 rounded-full border-2 border-white object-cover shadow-sm"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuCmTKITJqrhmslUJL0L8vY4QNF-UkBVlh5p-i93as--iV1JoMqgT8wxB5WFFF2u9HNwZE0FwTsFyzy_xxRYc2uzYct7lePnY-BHTwdeT0TYKFkRSP08alc6Bz_RY1cF4melGrCcSNFoM--aH7I1tgTh15eb5ChXPnDfI83wsOp6lbECgvJ5JA4BRJQN-EKFmH2RvmdjjHbqBOiOQ72avb_2oG4m2e3xIE_8fPiSCTC3ZkTV5SYEFGQIsCXDqmJL12gj5bnXp2pBXVA"/>
           </div>
-          <p class="font-caption text-caption text-on-surface-variant">
-            <span class="font-bold text-primary">500+</span> familias asesoradas
-            este año
-          </p>
+          <div>
+            <p class="font-label-md text-label-md text-slate-800">
+              <span class="text-sky-700 font-bold">500+</span> familias asesoradas este año
+            </p>
+            <div class="flex items-center gap-1 mt-0.5">
+              <span class="material-symbols-outlined text-amber-400" style="font-size:14px; font-variation-settings:'FILL' 1;">star</span>
+              <span class="material-symbols-outlined text-amber-400" style="font-size:14px; font-variation-settings:'FILL' 1;">star</span>
+              <span class="material-symbols-outlined text-amber-400" style="font-size:14px; font-variation-settings:'FILL' 1;">star</span>
+              <span class="material-symbols-outlined text-amber-400" style="font-size:14px; font-variation-settings:'FILL' 1;">star</span>
+              <span class="material-symbols-outlined text-amber-400" style="font-size:14px; font-variation-settings:'FILL' 1;">star</span>
+              <span class="font-caption text-caption text-slate-400 ml-1">5.0 / 5.0</span>
+            </div>
+          </div>
         </div>
+
+        <!-- ── Franja de estadísticas ── -->
+        <div class="grid grid-cols-3 gap-0 mt-2 bg-white rounded-2xl shadow-ambient-low border border-slate-100 overflow-hidden">
+          <div class="flex flex-col items-center py-4 px-3">
+            <span class="text-2xl font-extrabold text-sky-800 font-manrope">500+</span>
+            <span class="font-caption text-caption text-slate-500 text-center mt-0.5">Familias<br>Asesoradas</span>
+          </div>
+          <div class="flex flex-col items-center py-4 px-3 border-x border-slate-100">
+            <span class="text-2xl font-extrabold text-sky-800 font-manrope">8+</span>
+            <span class="font-caption text-caption text-slate-500 text-center mt-0.5">Años de<br>Experiencia</span>
+          </div>
+          <div class="flex flex-col items-center py-4 px-3">
+            <span class="text-2xl font-extrabold text-sky-800 font-manrope">100%</span>
+            <span class="font-caption text-caption text-slate-500 text-center mt-0.5">Proceso<br>Confidencial</span>
+          </div>
+        </div>
+
       </div>
-      <div class="md:col-span-7 relative p-5">
-        <div
-          class="absolute inset-0 bg-gradient-to-tr from-secondary-fixed/20 to-tertiary-fixed/20 rounded-[2rem] transform translate-x-4 translate-y-4 -z-10"
-        ></div>
+
+      <!-- COLUMNA DERECHA: imagen (oculta en móvil, visible en md+) -->
+      <div class="hidden md:block md:col-span-7 relative p-5">
+
+        <!-- Foto principal -->
         <img
           alt="Trabajadora social chilena en su oficina"
-          class="w-full h-[600px] object-cover rounded-[2rem] shadow-ambient-high"
+          class="w-full h-[560px] object-cover rounded-[2.5rem] shadow-2xl"
           data-alt="Warm, professional photo of a smiling female social worker in a modern, sunlit office in Santiago, Chile, sitting at a desk and listening empathetically"
           src="https://lh3.googleusercontent.com/aida-public/AB6AXuDAnoYsW_e8rlFtoBKzOGbhm3JJyneEDxs1fz3fwut-Jtr7KaPI2RW57L85lM9X2NHBnTJ1zxHPuY5dbQxPSdrOWenggYizft_h3CcnEoklhtitGYF8AYiEbYwPxbIYsHw74WWsqoZV_e1kKBMhRRPG_VAgTDIcdoMu7XzSbPgmZNiCbqJJ8RS7JdOT-SngR-GOKwTDx5MwG2zo3Z6ZEHZcccIo5XDH3kv969yvj4tu1F9IYOH_uHAQiXoR8j6hujMZMeDdCU0-788"
         />
-        <!-- Floating Badge -->
-        <div
-          class="absolute bottom-8 left-[-2rem] bg-surface-container-lowest p-4 rounded-xl shadow-ambient-high flex items-center gap-3 border border-surface-variant"
-        >
-          <div class="bg-tertiary-fixed p-2 rounded-lg text-tertiary-container">
-            <span
-              class="material-symbols-outlined"
-              style="font-variation-settings: &quot;FILL&quot; 1"
-              >verified</span
-            >
+
+        <!-- Badge inferior-izquierdo: Verificada -->
+        <div class="absolute bottom-6 left-[-1.5rem] bg-white p-4 rounded-2xl shadow-xl border border-slate-100 flex items-center gap-3">
+          <div class="bg-teal-50 p-2 rounded-xl flex items-center justify-center">
+            <span class="material-symbols-outlined text-teal-600" style="font-size:22px; font-variation-settings:'FILL' 1;">verified</span>
           </div>
           <div>
-            <p class="font-label-md text-label-md text-primary">
-              Trabajadora Social
-            </p>
-            <p class="font-caption text-caption text-on-surface-variant">
-              Diplomados y Certificados
-            </p>
+            <p class="font-label-md text-label-md text-slate-800">Trabajadora Social</p>
+            <p class="font-caption text-caption text-slate-400">Diplomada & Certificada</p>
           </div>
         </div>
+
+        <!-- Badge superior-derecho: Disponibilidad -->
+        <div class="absolute top-8 right-0 bg-white px-4 py-3 rounded-2xl shadow-xl border border-slate-100 flex items-center gap-2.5">
+          <span class="relative flex h-2.5 w-2.5">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span>
+          </span>
+          <div>
+            <p class="font-label-md text-label-md text-slate-800">Disponible hoy</p>
+            <p class="font-caption text-caption text-slate-400">Agenda tu hora ahora</p>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
-  <!-- Services Grid Section -->
-  <section class="py-18" id="seccion-servicios">
+  <!-- Services Section -->
+  <section class="py-10 md:py-18" id="seccion-servicios">
     <div class="max-w-container-max mx-auto px-4 md:px-8">
+
+      <!-- Encabezado -->
       <div class="text-center mb-16 max-w-2xl mx-auto">
-        <h2 class="font-h2 text-h2 text-primary mb-4">
-          Servicios Especializados
+
+        <!-- Pill de categoría -->
+        <div class="inline-flex items-center gap-2 bg-sky-50 border border-sky-200 text-sky-700 px-4 py-1.5 rounded-full mb-5 font-label-md text-label-md shadow-sm">
+          <span class="material-symbols-outlined text-sky-500" style="font-size:15px; font-variation-settings:'FILL' 1;">category</span>
+          Lo que ofrezco
+        </div>
+
+        <!-- Título con acento SVG -->
+        <h2 class="font-h2 text-h2 text-primary mb-5 leading-tight">
+          Servicios
+          <span class="relative inline-block text-sky-800">
+            Especializados
+            <svg class="absolute -bottom-1.5 left-0 w-full overflow-visible" viewBox="0 0 220 8" fill="none" preserveAspectRatio="none">
+              <path d="M2 6 C55 2, 110 1, 165 3.5 S200 7, 218 6" stroke="#38bdf8" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+            </svg>
+          </span>
         </h2>
-        <p class="font-body-lg text-body-lg text-on-surface-variant">
+
+        <!-- Descripción enriquecida -->
+        <p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl mx-auto">
           Soluciones integrales diseñadas para responder a necesidades complejas
-          con claridad y eficacia técnica.
+          con <span class="font-semibold text-slate-700">claridad metodológica</span> y un enfoque
+          <span class="font-semibold text-slate-700">profundamente humano</span>.
         </p>
       </div>
 
-      <div class="relative group max-w-6xl mx-auto px-8">
-        <button 
-          onclick="scrollCarousel('prev')" 
-          class="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white/90 backdrop-blur p-3 rounded-full shadow-md border border-slate-100 text-slate-400 hover:text-sky-600 hover:shadow-xl hover:border-sky-50 hover:scale-110 transition-all duration-300 opacity-0 group-hover:opacity-100 focus:outline-none flex items-center justify-center"
+      <!-- Carrusel -->
+      <div class="relative group max-w-6xl mx-auto px-0 md:px-8">
+        <button
+          onclick="scrollCarousel('prev')"
+          class="hidden md:flex absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white/90 backdrop-blur p-3 rounded-full shadow-md border border-slate-100 text-slate-400 hover:text-sky-600 hover:shadow-xl hover:border-sky-50 hover:scale-110 transition-all duration-300 opacity-0 group-hover:opacity-100 focus:outline-none items-center justify-center"
         >
           <span class="material-symbols-outlined text-1xl">chevron_left</span>
         </button>
 
-        <div 
-          id="service-carousel" 
-          class="flex overflow-x-hidden gap-6 scroll-smooth py-6 px-2 snap-x snap-mandatory"
+        <div
+          id="service-carousel"
+          class="flex overflow-x-auto md:overflow-x-hidden gap-4 scroll-smooth py-6 px-2 snap-x snap-mandatory"
+          style="-webkit-overflow-scrolling: touch; scrollbar-width: none;"
         >
           {% for servicio in servicios %}
-              {% include 'components/card_servicio.html' %}
+            {% include 'components/card_servicio.html' %}
           {% endfor %}
         </div>
-        <button 
-          onclick="scrollCarousel('next')" 
-          class="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white/90 backdrop-blur p-3 rounded-full shadow-md border border-slate-100 text-slate-400 hover:text-sky-600 hover:shadow-xl hover:border-sky-50 hover:scale-110 transition-all duration-300 opacity-0 group-hover:opacity-100 focus:outline-none flex items-center justify-center"
+
+        <button
+          onclick="scrollCarousel('next')"
+          class="hidden md:flex absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white/90 backdrop-blur p-3 rounded-full shadow-md border border-slate-100 text-slate-400 hover:text-sky-600 hover:shadow-xl hover:border-sky-50 hover:scale-110 transition-all duration-300 opacity-0 group-hover:opacity-100 focus:outline-none items-center justify-center"
         >
           <span class="material-symbols-outlined text-1xl">chevron_right</span>
         </button>
       </div>
+
     </div>
   </section>
-  <!-- Booking Section (Bento Grid Style) -->
-  <section id="seccion-reserva" class="py-24 px-4 md:px-8 max-w-container-max mx-auto">
-    <div class="bg-white rounded-[2rem] shadow-ambient-high overflow-hidden">
+  <!-- Booking Section -->
+  <section id="seccion-reserva" class="py-12 md:py-24 px-0 md:px-8 max-w-container-max mx-auto">
+    <div class="bg-white rounded-none md:rounded-2xl lg:rounded-[2rem] shadow-ambient-high overflow-hidden">
       <div class="grid lg:grid-cols-2">
-        <!-- Informational Side -->
-        <div
-          class="bg-sky-900 text-white p-12 lg:p-16 flex flex-col justify-between relative overflow-hidden"
-        >
+
+        <!-- Panel informativo (solo desktop lg+) -->
+        <div class="hidden lg:flex bg-sky-900 text-white p-16 flex-col justify-between relative overflow-hidden">
           <div
             class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1555448248-2571daf6344b?auto=format&amp;fit=crop&amp;w=800&amp;q=80')] opacity-10 mix-blend-overlay"
             data-alt="Abstract soft focus background of leaves and warm light"
           ></div>
           <div class="relative z-10">
-            <h2 class="font-h2 text-h2 text-white mb-4">Inicia tu Proceso</h2>
+            <h2 class="font-h2 text-h2 text-white mb-3">Inicia tu Proceso</h2>
             <p class="font-body-lg text-body-lg text-primary-fixed mb-12" style="text-align: justify;">
               Da el primer paso agendando una sesión exploratoria. Revisaré
               personalmente tu caso para proponerte la mejor ruta de acción.
@@ -160,28 +220,17 @@
                   <span class="material-symbols-outlined">schedule</span>
                 </div>
                 <div>
-                  <h4 class="font-label-md text-label-md text-white mb-1">
-                    Horarios Flexibles
-                  </h4>
-                  <p class="font-caption text-caption text-primary-fixed">
-                    Lunes a Viernes, 09:00 - 19:00 hrs.
-                  </p>
+                  <h4 class="font-label-md text-label-md text-white mb-1">Horarios Flexibles</h4>
+                  <p class="font-caption text-caption text-primary-fixed">Lunes a Viernes, 09:00 - 19:00 hrs.</p>
                 </div>
               </div>
               <div class="flex items-start gap-4">
                 <div class="bg-white/10 p-2 rounded-lg text-white">
-                  <span class="material-symbols-outlined"
-                    >video_camera_front</span
-                  >
+                  <span class="material-symbols-outlined">video_camera_front</span>
                 </div>
                 <div>
-                  <h4 class="font-label-md text-label-md text-white mb-1">
-                    Modalidad Híbrida
-                  </h4>
-                  <p class="font-caption text-caption text-primary-fixed">
-                    Atención presencial en Santiago o vía videollamada a todo
-                    Chile.
-                  </p>
+                  <h4 class="font-label-md text-label-md text-white mb-1">Modalidad Híbrida</h4>
+                  <p class="font-caption text-caption text-primary-fixed">Atención presencial en Santiago o vía videollamada a todo Chile.</p>
                 </div>
               </div>
               <div class="flex items-start gap-4">
@@ -189,215 +238,195 @@
                   <span class="material-symbols-outlined">lock</span>
                 </div>
                 <div>
-                  <h4 class="font-label-md text-label-md text-white mb-1">
-                    Confidencialidad Absoluta
-                  </h4>
-                  <p class="font-caption text-caption text-primary-fixed">
-                    Tus datos e historia están protegidos bajo secreto
-                    profesional.
-                  </p>
+                  <h4 class="font-label-md text-label-md text-white mb-1">Confidencialidad Absoluta</h4>
+                  <p class="font-caption text-caption text-primary-fixed">Tus datos e historia están protegidos bajo secreto profesional.</p>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <!-- Form Side -->
-        <div class="p-12 lg:p-16 bg-sky-50">
-          <form
-            method="POST"
-            action="{% url 'agendar_cita' %}"
-            class="space-y-6"
-          >
-          {% csrf_token %}
-          {% if messages %}
-            {% for message in messages %}
-              <div class="p-4 mb-6 rounded-xl shadow-sm flex items-center gap-3 
-                {% if message.tags == 'error' %}bg-red-50 text-red-700 border-l-4 border-red-500{% else %}bg-teal-50 text-teal-700 border-l-4 border-teal-500{% endif %}">
-                <span class="material-symbols-outlined">{% if message.tags == 'error' %}error{% else %}check_circle{% endif %}</span>
-                <p>{{ message }}</p>
+
+        <!-- Área del formulario -->
+        <div class="bg-sky-50">
+
+          <!-- Encabezado móvil (oculto en lg+) -->
+          <div class="lg:hidden bg-sky-900 text-white px-6 py-8">
+            <h2 class="font-manrope font-bold text-2xl text-white mb-1">Agenda tu Cita</h2>
+            <p class="text-sky-200 text-sm mb-5">Da el primer paso. Te contactaré en menos de 24 hrs.</p>
+            <!-- Trust badges horizontales -->
+            <div class="flex gap-3 flex-wrap">
+              <div class="flex items-center gap-1.5 bg-white/10 rounded-full px-3 py-1.5">
+                <span class="material-symbols-outlined text-sky-300" style="font-size:14px; font-variation-settings:'FILL' 1;">schedule</span>
+                <span class="text-xs font-medium text-sky-100">Horarios Flexibles</span>
               </div>
-            {% endfor %}
-          {% endif %}
-            {% if form.errors %}
-            <div
-              class="bg-red-50 border-l-4 border-red-500 text-red-700 p-4 rounded-xl mb-6 text-sm"
-            >
-              <p class="font-bold">Hay errores en los campos de tu solicitud:</p>
-              {{ form.errors }}
+              <div class="flex items-center gap-1.5 bg-white/10 rounded-full px-3 py-1.5">
+                <span class="material-symbols-outlined text-sky-300" style="font-size:14px; font-variation-settings:'FILL' 1;">video_camera_front</span>
+                <span class="text-xs font-medium text-sky-100">Online o Presencial</span>
+              </div>
+              <div class="flex items-center gap-1.5 bg-white/10 rounded-full px-3 py-1.5">
+                <span class="material-symbols-outlined text-sky-300" style="font-size:14px; font-variation-settings:'FILL' 1;">lock</span>
+                <span class="text-xs font-medium text-sky-100">100% Confidencial</span>
+              </div>
             </div>
+          </div>
+
+          <!-- Formulario -->
+          <div class="p-6 md:p-10 lg:p-16">
+            <form
+              method="POST"
+              action="{% url 'agendar_cita' %}"
+              class="space-y-5"
+            >
+            {% csrf_token %}
+            {% if messages %}
+              {% for message in messages %}
+                <div class="p-4 mb-4 rounded-xl shadow-sm flex items-center gap-3
+                  {% if message.tags == 'error' %}bg-red-50 text-red-700 border-l-4 border-red-500{% else %}bg-teal-50 text-teal-700 border-l-4 border-teal-500{% endif %}">
+                  <span class="material-symbols-outlined">{% if message.tags == 'error' %}error{% else %}check_circle{% endif %}</span>
+                  <p>{{ message }}</p>
+                </div>
+              {% endfor %}
             {% endif %}
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div>
-                <label
-                  class="block font-label-md text-label-md text-on-surface mb-2"
-                  >Nombre Completo</label
-                >
-                <input
-                  name="nombre"
-                  value="{{ form.nombre.value|default_if_none:'' }}"
-                  required
-                  class="w-full rounded-xl border-surface-variant focus:border-primary focus:ring-primary text-body-md py-3 px-4 shadow-sm"
-                  placeholder="Ej. Juan Erices"
-                  type="text"
-                />
+              {% if form.errors %}
+              <div class="bg-red-50 border-l-4 border-red-500 text-red-700 p-4 rounded-xl mb-4 text-sm">
+                <p class="font-bold">Hay errores en los campos de tu solicitud:</p>
+                {{ form.errors }}
               </div>
-              <div>
-                <label
-                  class="block font-label-md text-label-md text-on-surface mb-2"
-                  >RUT</label
-                >
-                <input
-                  name="rut"
-                  value="{{ form.rut.value|default_if_none:'' }}"
-                  required
-                  class="w-full rounded-xl border-surface-variant focus:border-primary focus:ring-primary text-body-md py-3 px-4 shadow-sm"
-                  placeholder="21.345.678-9"
-                  type="text"
-                />
+              {% endif %}
+
+              <!-- Nombre y RUT -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="block font-label-md text-label-md text-on-surface mb-1.5">Nombre Completo</label>
+                  <input
+                    name="nombre"
+                    value="{{ form.nombre.value|default_if_none:'' }}"
+                    required
+                    class="w-full rounded-xl border-surface-variant focus:border-primary focus:ring-primary text-body-md py-3 px-4 shadow-sm"
+                    placeholder="Ej. Juan Erices"
+                    type="text"
+                  />
+                </div>
+                <div>
+                  <label class="block font-label-md text-label-md text-on-surface mb-1.5">RUT</label>
+                  <input
+                    name="rut"
+                    value="{{ form.rut.value|default_if_none:'' }}"
+                    required
+                    class="w-full rounded-xl border-surface-variant focus:border-primary focus:ring-primary text-body-md py-3 px-4 shadow-sm"
+                    placeholder="21.345.678-9"
+                    type="text"
+                  />
+                </div>
               </div>
-            </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div>
-                <label
-                  class="block font-label-md text-label-md text-on-surface mb-2"
-                  >Correo Electrónico</label
-                >
-                <input
-                  name="email"
-                  value="{{ form.email.value|default_if_none:'' }}"
-                  required
-                  class="w-full rounded-xl border-surface-variant focus:border-primary focus:ring-primary text-body-md py-3 px-4 shadow-sm"
-                  placeholder="ejemplo@correo.com"
-                  type="email"
-                />
+              <!-- Email y Teléfono -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="block font-label-md text-label-md text-on-surface mb-1.5">Correo Electrónico</label>
+                  <input
+                    name="email"
+                    value="{{ form.email.value|default_if_none:'' }}"
+                    required
+                    class="w-full rounded-xl border-surface-variant focus:border-primary focus:ring-primary text-body-md py-3 px-4 shadow-sm"
+                    placeholder="ejemplo@correo.com"
+                    type="email"
+                  />
+                </div>
+                <div>
+                  <label class="block font-label-md text-label-md text-on-surface mb-1.5">Teléfono de Contacto</label>
+                  <input
+                    name="telefono"
+                    value="{{ form.telefono.value|default_if_none:'' }}"
+                    required
+                    class="w-full rounded-xl border-surface-variant focus:border-primary focus:ring-primary text-body-md py-3 px-4 shadow-sm"
+                    placeholder="+569 XXXX XXXX"
+                    type="text"
+                  />
+                </div>
               </div>
+
+              <!-- Servicio -->
               <div>
-                <label
-                  class="block font-label-md text-label-md text-on-surface mb-2"
-                  >Teléfono de Contacto</label
-                >
-                <input
-                  name="telefono"
-                  value="{{ form.telefono.value|default_if_none:'' }}"
+                <label class="block font-label-md text-label-md text-on-surface mb-1.5">Servicio de Interés</label>
+                <select
+                  name="servicio"
                   required
-                  class="w-full rounded-xl border-surface-variant focus:border-primary focus:ring-primary text-body-md py-3 px-4 shadow-sm"
-                  placeholder="+569 XXXX XXXX"
-                  type="text"
-                />
+                  class="w-full rounded-xl border-surface-variant focus:border-primary focus:ring-primary text-body-md py-3 px-4 shadow-sm bg-white"
+                >
+                  <option value="" disabled selected>Seleccione un servicio...</option>
+                  {% for servicio in servicios %}
+                  <option value="{{ servicio.nombre }}">{{ servicio.nombre }}</option>
+                  {% endfor %}
+                </select>
               </div>
-            </div>
 
-            <div>
-              <label
-                class="block font-label-md text-label-md text-on-surface mb-2"
-                >Servicio de Interés</label
-              >
-              <select
-                name="servicio"
-                required
-                class="w-full rounded-xl border-surface-variant focus:border-primary focus:ring-primary text-body-md py-3 px-4 shadow-sm bg-white"
-              >
-                <option value="" disabled selected>
-                  Seleccione un servicio...
-                </option>
-                {% for servicio in servicios %}
-                <option value="{{ servicio.nombre }}">
-                  {{ servicio.nombre }}
-                </option>
-                {% endfor %}
-              </select>
-            </div>
-
-            <div>
-              <label class="block font-bold text-label-md text-on-surface mb-2">
-                Selecciona tu Hora <span class="text-red-500">*</span>
-              </label>
-              <input
-                type="hidden"
-                name="fecha_hora_reserva"
-                id="input_fecha_hora"
-                required
-              />
-
-              <div
-                class="mt-2 bg-white rounded-xl border border-surface-variant p-4 h-64 overflow-y-auto shadow-inner"
-              >
-                {% for dia in slots_disponibles %}
-                <div class="mb-4 last:mb-0">
-                  <p class="font-bold text-teal-800 text-sm mb-2 border-b pb-1">
-                    {{ dia.fecha_texto }}
-                  </p>
-                  <div class="flex flex-wrap gap-2">
-                    {% for bloque in dia.bloques %}
-                    <button
-                      type="button"
-                      data-datetime="{{ bloque.valor }}"
-                      class="btn-hora bg-sky-100 border border-sky-600 text-sky-700 font-semibold px-4 py-2 rounded-lg hover:bg-sky-600 hover:text-white transition-colors text-sm focus:outline-none"
-                    >
-                      {{ bloque.etiqueta }}
-                    </button>
-                    {% endfor %}
+              <!-- Seleccionar hora -->
+              <div>
+                <label class="block font-bold text-label-md text-on-surface mb-1.5">
+                  Selecciona tu Hora <span class="text-red-500">*</span>
+                </label>
+                <input type="hidden" name="fecha_hora_reserva" id="input_fecha_hora" required />
+                <div class="mt-2 bg-white rounded-xl border border-surface-variant p-4 h-56 overflow-y-auto shadow-inner">
+                  {% for dia in slots_disponibles %}
+                  <div class="mb-4 last:mb-0">
+                    <p class="font-bold text-teal-800 text-sm mb-2 border-b pb-1">{{ dia.fecha_texto }}</p>
+                    <div class="flex flex-wrap gap-2">
+                      {% for bloque in dia.bloques %}
+                      <button
+                        type="button"
+                        data-datetime="{{ bloque.valor }}"
+                        class="btn-hora bg-sky-100 border border-sky-600 text-sky-700 font-semibold px-4 py-2 rounded-lg hover:bg-sky-600 hover:text-white transition-colors text-sm focus:outline-none"
+                      >
+                        {{ bloque.etiqueta }}
+                      </button>
+                      {% endfor %}
+                    </div>
                   </div>
+                  {% empty %}
+                  <div class="text-center py-8">
+                    <span class="material-symbols-outlined text-4xl text-slate-300 mb-2">event_busy</span>
+                    <p class="text-slate-500 font-medium">No hay horas disponibles por el momento.</p>
+                    <p class="text-slate-400 text-sm">Por favor, vuelve a intentar mañana.</p>
+                  </div>
+                  {% endfor %}
                 </div>
-                {% empty %}
-                <div class="text-center py-8">
-                  <span
-                    class="material-symbols-outlined text-4xl text-slate-300 mb-2"
-                    >event_busy</span
-                  >
-                  <p class="text-slate-500 font-medium">
-                    No hay horas disponibles por el momento.
-                  </p>
-                  <p class="text-slate-400 text-sm">
-                    Por favor, vuelve a intentar mañana.
-                  </p>
-                </div>
-                {% endfor %}
               </div>
-            </div>
 
-            <div>
-              <label
-                class="block font-label-md text-label-md text-on-surface mb-2"
-                >Breve descripción del motivo de consulta</label
-              >
-              <textarea
-                name="motivo_consulta"
-                required
-                class="w-full rounded-xl border-surface-variant focus:border-primary focus:ring-primary text-body-md py-3 px-4 shadow-sm resize-none"
-                placeholder="¿En qué podemos ayudarte?"
-                rows="3"
-              >
-              {% if form.motivo_consulta.value %}{{ form.motivo_consulta.value }}{% endif %}
-              </textarea>
-            </div>
-
-            <button
-              type="submit"
-              class="relative group w-full font-label-md text-label-md bg-sky-900 text-white py-4 rounded-xl hover:bg-sky-700 transition-colors shadow-ambient-low flex justify-center items-center gap-2 overflow-hidden"
-            >
-              <div class="absolute inset-0 w-[150%] h-full bg-gradient-to-r from-transparent via-white/20 to-transparent z-0 pointer-events-none animate-shimmer"></div>
-              
-              <span class="material-symbols-outlined absolute top-2 right-1/4 text-white/80 text-sm opacity-0 animate-sparkle z-0 pointer-events-none" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
-              <span class="material-symbols-outlined absolute bottom-2 left-1/4 text-white/80 text-xs opacity-0 animate-sparkle-delayed z-0 pointer-events-none" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
-
-              <span class="relative z-10 flex items-center gap-2">
-                Solicitar Agendamiento
-                <span class="material-symbols-outlined text-sm"
-                  >calendar_month</span
+              <!-- Motivo -->
+              <div>
+                <label class="block font-label-md text-label-md text-on-surface mb-1.5">Breve descripción del motivo de consulta</label>
+                <textarea
+                  name="motivo_consulta"
+                  required
+                  class="w-full rounded-xl border-surface-variant focus:border-primary focus:ring-primary text-body-md py-3 px-4 shadow-sm resize-none"
+                  placeholder="¿En qué podemos ayudarte?"
+                  rows="3"
                 >
-              </span>
-            </button>
+                {% if form.motivo_consulta.value %}{{ form.motivo_consulta.value }}{% endif %}
+                </textarea>
+              </div>
 
-            <p
-              class="font-caption text-caption text-center text-on-surface-variant mt-4"
-            >
-              Me pondré en contacto contigo dentro de las próximas 24 horas.
-            </p>
-          </form>
+              <!-- Botón enviar -->
+              <button
+                type="submit"
+                class="relative group w-full font-label-md text-label-md bg-sky-900 text-white py-4 rounded-xl hover:bg-sky-700 transition-colors shadow-ambient-low flex justify-center items-center gap-2 overflow-hidden"
+              >
+                <div class="absolute inset-0 w-[150%] h-full bg-gradient-to-r from-transparent via-white/20 to-transparent z-0 pointer-events-none animate-shimmer"></div>
+                <span class="material-symbols-outlined absolute top-2 right-1/4 text-white/80 text-sm opacity-0 animate-sparkle z-0 pointer-events-none" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+                <span class="material-symbols-outlined absolute bottom-2 left-1/4 text-white/80 text-xs opacity-0 animate-sparkle-delayed z-0 pointer-events-none" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+                <span class="relative z-10 flex items-center gap-2">
+                  Solicitar Agendamiento
+                </span>
+              </button>
+
+              <p class="font-caption text-caption text-center text-on-surface-variant mt-2">
+                Me pondré en contacto contigo dentro de las próximas 24 horas.
+              </p>
+            </form>
+          </div>
         </div>
+
       </div>
     </div>
   </section>

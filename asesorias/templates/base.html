@@ -224,43 +224,28 @@
     </style>
   </head>
   <body class="bg-slate-50 text-slate-900 font-sans">
-    <nav
-      class="fixed top-0 w-full z-50 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-slate-100 dark:border-slate-800 shadow-sm"
-    >
-      <div
-        class="flex justify-between items-center px-8 h-20 max-w-7xl mx-auto"
-      >
-        <div
-          class="text-xl font-extrabold text-[#1A2B3C] dark:text-white font-manrope tracking-tight"
-        >
+    <!-- Overlay oscuro para cerrar el menú móvil -->
+    <div id="mobile-overlay" class="fixed inset-0 bg-black/40 z-40 hidden md:hidden" onclick="closeMobileMenu()"></div>
+
+    <nav class="fixed top-0 w-full z-50 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-slate-100 dark:border-slate-800 shadow-sm">
+      <!-- Barra principal -->
+      <div class="flex justify-between items-center px-4 md:px-8 h-16 md:h-20 max-w-7xl mx-auto">
+        <div class="text-lg md:text-xl font-extrabold text-[#1A2B3C] dark:text-white font-manrope tracking-tight">
           AsesoraTS Chile
         </div>
+
+        <!-- Links desktop -->
         <div class="hidden md:flex items-center gap-8">
-          <a
-            class="text-slate-500 dark:text-slate-400 font-medium hover:text-[#1A2B3C] dark:hover:text-white transition-all duration-200 active:scale-95 transition-transform"
-            href="#seccion-servicios"
-            >Servicios</a
-          >
-          <a
-            class="text-slate-500 dark:text-slate-400 font-medium hover:text-[#1A2B3C] dark:hover:text-white transition-all duration-200 active:scale-95 transition-transform"
-            href="/about/"
-            >Sobre mi</a
-          >
+          <a class="text-slate-500 font-medium hover:text-[#1A2B3C] transition-all duration-200" href="#seccion-servicios">Servicios</a>
+          <a class="text-slate-500 font-medium hover:text-[#1A2B3C] transition-all duration-200" href="/about/">Sobre mi</a>
           <!-- Hay que definir bien con Antonia, que se debe poner aqui: Recursos, Contacto -->
-          <a
-            class="text-slate-500 dark:text-slate-400 font-medium hover:text-[#1A2B3C] dark:hover:text-white transition-all duration-200 active:scale-95 transition-transform"
-            href="#"
-            >Recursos</a
-          >
-          <a
-            class="text-slate-500 dark:text-slate-400 font-medium hover:text-[#1A2B3C] dark:hover:text-white transition-all duration-200 active:scale-95 transition-transform"
-            href="#"
-            >Contacto</a
-          >
+          <a class="text-slate-500 font-medium hover:text-[#1A2B3C] transition-all duration-200" href="#">Recursos</a>
+          <a class="text-slate-500 font-medium hover:text-[#1A2B3C] transition-all duration-200" href="#">Contacto</a>
         </div>
+
+        <!-- CTAs desktop -->
         <div class="hidden md:flex items-center gap-4">
-          <a href="https://www.linkedin.com/in/antonia-moyano-silva-35183030b/"
-            target="_blank"
+          <a href="https://www.linkedin.com/in/antonia-moyano-silva-35183030b/" target="_blank"
             class="relative group flex items-center justify-center gap-2 font-label-md text-label-md border-2 border-[#0077b5] text-[#0077b5] px-2 py-2 rounded-xl hover:bg-[#0077b5] hover:text-white transition-all">
             <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
               <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.239-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
@@ -270,23 +255,89 @@
               ¡Mira mi perfil!
             </div>
           </a>
-
           <a href="#seccion-reserva"
             class="relative group cursor-pointer font-label-md text-label-md text-sky-50 overflow-hidden rounded-lg px-6 py-2.5 hover:opacity-90 transition-all shadow-ambient-low flex items-center justify-center bg-sky-800">
-            
             <div class="absolute top-3 right-20 group-hover:top-12 group-hover:-right-12 z-10 w-40 h-40 rounded-full group-hover:scale-150 group-hover:opacity-50 duration-500 bg-sky-900"></div>
             <div class="absolute top-3 right-20 group-hover:top-12 group-hover:-right-12 z-10 w-32 h-32 rounded-full group-hover:scale-150 group-hover:opacity-50 duration-500 bg-sky-800"></div>
             <div class="absolute top-3 right-20 group-hover:top-12 group-hover:-right-12 z-10 w-24 h-24 rounded-full group-hover:scale-150 group-hover:opacity-50 duration-500 bg-sky-700"></div>
             <div class="absolute top-3 right-20 group-hover:top-12 group-hover:-right-12 z-10 w-14 h-14 rounded-full group-hover:scale-150 group-hover:opacity-50 duration-500 bg-sky-600"></div>
-            
             <span class="z-10 relative">Agendar Cita</span>
           </a>
         </div>
-        <button class="md:hidden text-[#1A2B3C] dark:text-white p-2">
-          <span class="material-symbols-outlined">menu</span>
+
+        <!-- Botón hamburguesa móvil -->
+        <button id="mobile-menu-btn" onclick="toggleMobileMenu()" class="md:hidden text-[#1A2B3C] p-2 rounded-lg hover:bg-slate-100 transition-colors" aria-label="Abrir menú">
+          <span id="hamburger-icon" class="material-symbols-outlined">menu</span>
         </button>
       </div>
+
+      <!-- Panel menú móvil -->
+      <div id="mobile-menu"
+        class="md:hidden hidden flex-col bg-white border-t border-slate-100 shadow-lg px-4 py-5 gap-1"
+      >
+        <a href="#seccion-servicios" onclick="closeMobileMenu()" class="flex items-center gap-3 text-slate-700 font-medium px-3 py-3 rounded-xl hover:bg-sky-50 hover:text-sky-700 transition-colors">
+          <span class="material-symbols-outlined text-slate-400" style="font-size:20px;">category</span>
+          Servicios
+        </a>
+        <a href="/about/" onclick="closeMobileMenu()" class="flex items-center gap-3 text-slate-700 font-medium px-3 py-3 rounded-xl hover:bg-sky-50 hover:text-sky-700 transition-colors">
+          <span class="material-symbols-outlined text-slate-400" style="font-size:20px;">person</span>
+          Sobre mí
+        </a>
+        <a href="#" onclick="closeMobileMenu()" class="flex items-center gap-3 text-slate-700 font-medium px-3 py-3 rounded-xl hover:bg-sky-50 hover:text-sky-700 transition-colors">
+          <span class="material-symbols-outlined text-slate-400" style="font-size:20px;">menu_book</span>
+          Recursos
+        </a>
+        <a href="#" onclick="closeMobileMenu()" class="flex items-center gap-3 text-slate-700 font-medium px-3 py-3 rounded-xl hover:bg-sky-50 hover:text-sky-700 transition-colors">
+          <span class="material-symbols-outlined text-slate-400" style="font-size:20px;">mail</span>
+          Contacto
+        </a>
+        <div class="border-t border-slate-100 mt-2 pt-4 flex flex-col gap-3">
+          <a href="https://www.linkedin.com/in/antonia-moyano-silva-35183030b/" target="_blank"
+            class="flex items-center justify-center gap-2 border-2 border-[#0077b5] text-[#0077b5] px-4 py-2.5 rounded-xl font-medium hover:bg-[#0077b5] hover:text-white transition-all">
+            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.239-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+            Ver Perfil en LinkedIn
+          </a>
+          <a href="#seccion-reserva" onclick="closeMobileMenu()"
+            class="relative group overflow-hidden flex items-center justify-center gap-2 bg-sky-800 text-white px-4 py-3 rounded-xl font-medium transition-all">
+            <div class="absolute top-3 right-20 group-hover:top-12 group-hover:-right-12 z-10 w-40 h-40 rounded-full group-hover:scale-150 group-hover:opacity-50 duration-500 bg-sky-900"></div>
+            <div class="absolute top-3 right-20 group-hover:top-12 group-hover:-right-12 z-10 w-24 h-24 rounded-full group-hover:scale-150 group-hover:opacity-50 duration-500 bg-sky-700"></div>
+            <span class="relative z-10 flex items-center gap-2">
+              <span class="material-symbols-outlined" style="font-size:18px;">calendar_month</span>
+              Agendar Cita
+            </span>
+          </a>
+        </div>
+      </div>
     </nav>
+
+    <script>
+      function toggleMobileMenu() {
+        const menu = document.getElementById('mobile-menu');
+        const overlay = document.getElementById('mobile-overlay');
+        const icon = document.getElementById('hamburger-icon');
+        const isOpen = !menu.classList.contains('hidden');
+        if (isOpen) {
+          menu.classList.add('hidden');
+          menu.classList.remove('flex');
+          overlay.classList.add('hidden');
+          icon.textContent = 'menu';
+        } else {
+          menu.classList.remove('hidden');
+          menu.classList.add('flex');
+          overlay.classList.remove('hidden');
+          icon.textContent = 'close';
+        }
+      }
+      function closeMobileMenu() {
+        const menu = document.getElementById('mobile-menu');
+        const overlay = document.getElementById('mobile-overlay');
+        const icon = document.getElementById('hamburger-icon');
+        menu.classList.add('hidden');
+        menu.classList.remove('flex');
+        overlay.classList.add('hidden');
+        icon.textContent = 'menu';
+      }
+    </script>
 
     <main>{% block content %}{% endblock %}</main>
 
