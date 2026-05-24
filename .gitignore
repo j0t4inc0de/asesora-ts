@@ -1,3 +1,5 @@
 .env
 .venv
 .antigravitycli
+# Base de datos
+db.sqlite3
