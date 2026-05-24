@@ -92,12 +92,20 @@ def agendar_cita(request):
                         "failure": f"{site_url}{reverse('pago_fallo')}",
                         "pending": f"{site_url}{reverse('pago_pendiente')}",
                     },
-                    "auto_return": "approved",
                     "external_reference": str(cita.id),
                     "notification_url": f"{site_url}{reverse('mp_webhook')}",
                 }
                 
+                # MP exige un dominio público para auto_return. Si estamos en localhost, lo omitimos.
+                if "localhost" not in site_url and "127.0.0.1" not in site_url:
+                    preference_data["auto_return"] = "approved"
+                
                 preference_response = sdk.preference().create(preference_data)
+                
+                if preference_response.get("status") not in (200, 201):
+                    error_msg = preference_response.get("response", "Error desconocido")
+                    raise Exception(f"MP devolvió error {preference_response.get('status')}: {error_msg}")
+                    
                 preference = preference_response["response"]
                 
                 # Guardar el preference_id en la cita
@@ -112,7 +120,7 @@ def agendar_cita(request):
                 # Si falla Mercado Pago, cancelar cita y avisar
                 cita.estado = 'X'
                 cita.save()
-                messages.error(request, "Hubo un error al conectar con el sistema de pago. Por favor, intenta de nuevo más tarde.")
+                messages.error(request, f"Hubo un error con Mercado Pago: {str(e)}")
                 return redirect(reverse('home') + '#seccion-reserva')
 
         else:
