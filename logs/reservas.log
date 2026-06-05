@@ -2,3 +2,12 @@
 2026-06-05 02:15:11,503 INFO asesorias.reservas RESERVA_OK | cita_id=2 | slot=2026-06-05 11:00:00
 2026-06-05 02:15:25,530 INFO asesorias.reservas RESERVA_INTENTO | slot=2026-06-05 11:00:00 | IP=127.0.0.1 | servicio=Diagnóstico Gratuito
 2026-06-05 02:15:25,532 INFO asesorias.reservas RESERVA_OK | cita_id=2 | slot=2026-06-05 11:00:00
+2026-06-05 02:19:21,230 INFO asesorias.reservas RESERVA_INTENTO | slot=2026-06-05 08:00:00 | IP=127.0.0.1 | servicio=prubeaa
+2026-06-05 02:19:21,234 INFO asesorias.reservas RESERVA_OK | cita_id=20 | slot=2026-06-05 08:00:00
+2026-06-05 02:19:23,055 ERROR asesorias.reservas MERCADOPAGO_ERROR | cita_id=20 | error=MP devolvió error 500: None
+2026-06-05 02:20:06,128 INFO asesorias.reservas RESERVA_INTENTO | slot=2026-06-05 11:00:00 | IP=127.0.0.1 | servicio=Diagnóstico Gratuito
+2026-06-05 02:20:06,130 INFO asesorias.reservas RESERVA_OK | cita_id=2 | slot=2026-06-05 11:00:00
+2026-06-05 02:20:23,453 INFO asesorias.reservas RESERVA_INTENTO | slot=2026-06-05 11:00:00 | IP=127.0.0.1 | servicio=Diagnóstico Gratuito
+2026-06-05 02:20:23,456 INFO asesorias.reservas RESERVA_OK | cita_id=2 | slot=2026-06-05 11:00:00
+2026-06-05 02:20:43,543 INFO asesorias.reservas RESERVA_INTENTO | slot=2026-06-05 11:00:00 | IP=127.0.0.1 | servicio=Diagnóstico Gratuito
+2026-06-05 02:20:43,545 INFO asesorias.reservas RESERVA_OK | cita_id=2 | slot=2026-06-05 11:00:00

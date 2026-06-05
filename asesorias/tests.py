@@ -148,8 +148,7 @@ class SistemaReservasTests(TestCase):
             estado='P',
             estado_pago='NO'
         )
-        cita.fecha_hora = timezone.now() - timedelta(minutes=45)
-        cita.save()
+        Cita.objects.filter(id=cita.id).update(creada_en=timezone.now() - timedelta(minutes=45))
 
         # Cita confirmada (no debe expirar aunque sea vieja)
         cita_c = Cita.objects.create(

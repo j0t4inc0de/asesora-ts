@@ -450,20 +450,61 @@
     // ── Selector de hora ──
     const inputOculto = document.getElementById("input_fecha_hora");
 
-    document.addEventListener("click", function (e) {
+    document.addEventListener("click", async function (e) {
       const boton = e.target.closest(".btn-hora");
       if (boton) {
+        if (boton.classList.contains("opacity-40")) return;
+
+        // Limpiar selecciones visuales anteriores
         document.querySelectorAll(".btn-hora").forEach((b) => {
-          b.style.backgroundColor = "";
-          b.style.color = "";
-          b.classList.remove("ring-2", "ring-teal-400");
+          if (!b.classList.contains("opacity-40")) {
+            b.style.backgroundColor = "";
+            b.style.color = "";
+            b.classList.remove("ring-2", "ring-teal-400");
+          }
         });
 
-        boton.style.backgroundColor = "#0077ff";
-        boton.style.color = "#ffffff";
-        boton.classList.add("ring-2", "ring-teal-400");
+        const datetime = boton.getAttribute("data-datetime");
+        const originalText = boton.innerText;
 
-        inputOculto.value = boton.getAttribute("data-datetime");
+        // Feedback visual de verificación
+        boton.style.backgroundColor = "#e2e8f0";
+        boton.style.color = "#4a5568";
+        boton.innerText = "Verificando...";
+
+        try {
+          const resp = await fetch(`/api/verificar-slot/?fecha_hora=${encodeURIComponent(datetime)}`);
+          if (resp.ok) {
+            const data = await resp.json();
+            if (data.disponible) {
+              boton.style.backgroundColor = "#0077ff";
+              boton.style.color = "#ffffff";
+              boton.classList.add("ring-2", "ring-teal-400");
+              boton.innerText = originalText;
+              inputOculto.value = datetime;
+            } else {
+              boton.style.backgroundColor = "#fed7d7";
+              boton.style.color = "#c53030";
+              boton.innerText = "Ocupado";
+              boton.classList.add("opacity-40");
+              boton.style.cursor = "not-allowed";
+              inputOculto.value = "";
+              alert("Este horario se acaba de reservar por otra persona. Por favor, selecciona una hora diferente.");
+            }
+          } else {
+            boton.style.backgroundColor = "#0077ff";
+            boton.style.color = "#ffffff";
+            boton.classList.add("ring-2", "ring-teal-400");
+            boton.innerText = originalText;
+            inputOculto.value = datetime;
+          }
+        } catch (_) {
+          boton.style.backgroundColor = "#0077ff";
+          boton.style.color = "#ffffff";
+          boton.classList.add("ring-2", "ring-teal-400");
+          boton.innerText = originalText;
+          inputOculto.value = datetime;
+        }
       }
     });
 

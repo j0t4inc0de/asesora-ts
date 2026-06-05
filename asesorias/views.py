@@ -5,6 +5,7 @@ from django.utils import timezone
 from django.contrib import messages
 from django.urls import reverse
 from django.db import IntegrityError, transaction
+from django.db.models import Q
 from datetime import date, timedelta, datetime
 from .models import Servicio, HorarioAtencion, Cita, SobreMi
 from .forms import FormularioDiagnostico
@@ -281,10 +282,12 @@ def obtener_slots_disponibles():
     slots_disponibles = []
 
     # Auto-expirar citas pendientes sin pago de hace más de 30 minutos
+    limite_expiracion = timezone.now() - timedelta(minutes=30)
     Cita.objects.filter(
         estado='P',
-        estado_pago='NO',
-        fecha_hora__lt=timezone.now() - timedelta(minutes=30)
+        estado_pago='NO'
+    ).filter(
+        Q(creada_en__lt=limite_expiracion) | Q(creada_en__isnull=True, fecha_hora__lt=limite_expiracion)
     ).update(estado='X')
 
     # Pre-cargar TODAS las horas ocupadas del rango en una sola query

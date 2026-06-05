@@ -18,6 +18,7 @@ Programar con cron (cada 15 minutos):
 from django.core.management.base import BaseCommand
 from django.utils import timezone
 from datetime import timedelta
+from django.db.models import Q
 
 from asesorias.models import Cita
 
@@ -43,12 +44,13 @@ class Command(BaseCommand):
         dry_run = options['dry_run']
         limite = timezone.now() - timedelta(minutes=minutos)
 
-        # Buscar citas pendientes sin pago cuya hora ya pasó o fueron
-        # creadas hace más del límite
+        # Buscar citas pendientes sin pago cuya hora de reserva fue creada hace más del límite
+        # (con fallback a la hora de la cita si creada_en es nulo para registros antiguos)
         citas_expiradas = Cita.objects.filter(
             estado='P',
-            estado_pago__in=['NO', 'PE'],
-            fecha_hora__lt=limite
+            estado_pago__in=['NO', 'PE']
+        ).filter(
+            Q(creada_en__lt=limite) | Q(creada_en__isnull=True, fecha_hora__lt=limite)
         )
 
         count = citas_expiradas.count()

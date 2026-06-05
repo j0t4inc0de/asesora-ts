@@ -9,10 +9,13 @@ from .models import Servicio, Cliente, Cita, HorarioAtencion, SobreMi, Experienc
 def expirar_citas_pendientes(modeladmin, request, queryset):
     from django.utils import timezone
     from datetime import timedelta
+    from django.db.models import Q
+    limite = timezone.now() - timedelta(minutes=30)
     count = queryset.filter(
         estado='P',
-        estado_pago='NO',
-        fecha_hora__lt=timezone.now() - timedelta(minutes=30)
+        estado_pago='NO'
+    ).filter(
+        Q(creada_en__lt=limite) | Q(creada_en__isnull=True, fecha_hora__lt=limite)
     ).update(estado='X')
     modeladmin.message_user(request, f'{count} citas pendientes expiradas.')
 expirar_citas_pendientes.short_description = 'Expirar citas pendientes sin pago (>30 min)'
