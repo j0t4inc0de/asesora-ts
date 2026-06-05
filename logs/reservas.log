@@ -1,0 +1,4 @@
+2026-06-05 02:15:11,501 INFO asesorias.reservas RESERVA_INTENTO | slot=2026-06-05 11:00:00 | IP=127.0.0.1 | servicio=Diagnóstico Gratuito
+2026-06-05 02:15:11,503 INFO asesorias.reservas RESERVA_OK | cita_id=2 | slot=2026-06-05 11:00:00
+2026-06-05 02:15:25,530 INFO asesorias.reservas RESERVA_INTENTO | slot=2026-06-05 11:00:00 | IP=127.0.0.1 | servicio=Diagnóstico Gratuito
+2026-06-05 02:15:25,532 INFO asesorias.reservas RESERVA_OK | cita_id=2 | slot=2026-06-05 11:00:00

@@ -93,6 +93,12 @@ class Cita(models.Model):
         max_length=100, blank=True, null=True, help_text="ID de Webpay/MercadoPago")
     mp_preference_id = models.CharField(
         max_length=100, blank=True, null=True, help_text="ID de la preferencia de Mercado Pago")
+    creada_en = models.DateTimeField(auto_now_add=True, null=True)
+
+    class Meta:
+        ordering = ['-fecha_hora']
+        verbose_name = 'Cita'
+        verbose_name_plural = 'Citas'
 
     def __str__(self):
         return f"Cita: {self.cliente.nombre} - {self.fecha_hora.strftime('%d/%m/%Y %H:%M')}"

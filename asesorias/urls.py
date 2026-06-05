@@ -10,4 +10,5 @@ urlpatterns = [
     path('pago/pendiente/', views.pago_pendiente, name='pago_pendiente'),
     path('webhooks/mercadopago/', views.mercadopago_webhook, name='mp_webhook'),
     path('servicio/<int:servicio_id>/', views.detalle_servicio, name='detalle_servicio'),
+    path('api/verificar-slot/', views.verificar_slot, name='verificar_slot'),
 ]

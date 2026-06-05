@@ -152,3 +152,48 @@ CSRF_TRUSTED_ORIGINS = ['https://asesora-moyano.wearesamod.com']
 
 # Le dice a Django que confíe en la cabecera HTTPS que le envía Cloudflare
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+# ─── SQLite: mejorar concurrencia con WAL mode y timeout extendido ───
+from django.db.backends.signals import connection_created
+
+def configurar_sqlite(sender, connection, **kwargs):
+    if connection.vendor == 'sqlite':
+        cursor = connection.cursor()
+        cursor.execute('PRAGMA journal_mode=WAL;')
+        cursor.execute('PRAGMA busy_timeout=15000;')  # 15 segundos
+
+connection_created.connect(configurar_sqlite)
+
+
+# ─── Logging para sistema de reservas ───
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '{asctime} {levelname} {name} {message}',
+            'style': '{',
+        },
+    },
+    'handlers': {
+        'console': {
+            'level': 'INFO',
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose',
+        },
+        'file': {
+            'level': 'INFO',
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(BASE_DIR, 'logs', 'reservas.log'),
+            'formatter': 'verbose',
+            'encoding': 'utf-8',
+        },
+    },
+    'loggers': {
+        'asesorias.reservas': {
+            'handlers': ['console', 'file'],
+            'level': 'INFO',
+            'propagate': False,
+        },
+    },
+}

@@ -435,8 +435,7 @@
 </main>
 <script>
   (function () {
-    console.log("¡Motor de agendamiento activo y cargado!");
-
+    // ── Formateador de RUT ──
     const rutInput = document.querySelector('input[name="rut"]');
     if (rutInput) {
       rutInput.addEventListener("input", function (e) {
@@ -448,17 +447,12 @@
       });
     }
 
+    // ── Selector de hora ──
     const inputOculto = document.getElementById("input_fecha_hora");
 
     document.addEventListener("click", function (e) {
       const boton = e.target.closest(".btn-hora");
-
       if (boton) {
-        console.log(
-          "Clic detectado en hora:",
-          boton.getAttribute("data-datetime"),
-        );
-
         document.querySelectorAll(".btn-hora").forEach((b) => {
           b.style.backgroundColor = "";
           b.style.color = "";
@@ -466,15 +460,89 @@
         });
 
         boton.style.backgroundColor = "#0077ff";
-        boton.style.color = "#ffffff"; // Blanco
+        boton.style.color = "#ffffff";
         boton.classList.add("ring-2", "ring-teal-400");
 
         inputOculto.value = boton.getAttribute("data-datetime");
-        console.log("Valor guardado en el formulario:", inputOculto.value);
       }
     });
+
+    // ── Prevención de doble envío + verificación de disponibilidad ──
+    const form = document.querySelector('form[action*="agendar"]');
+    if (form) {
+      let submitted = false;
+
+      form.addEventListener("submit", async function (e) {
+        // Prevenir doble envío
+        if (submitted) {
+          e.preventDefault();
+          return false;
+        }
+
+        const fechaHora = inputOculto ? inputOculto.value : null;
+        if (!fechaHora) return; // El browser ya valida con 'required'
+
+        // Deshabilitar botón y mostrar spinner
+        const btn = form.querySelector('button[type="submit"]');
+        const btnContent = btn ? btn.querySelector('.z-10.relative') : null;
+
+        submitted = true;
+        if (btn) {
+          btn.disabled = true;
+          btn.style.opacity = '0.7';
+          btn.style.cursor = 'wait';
+        }
+        if (btnContent) {
+          btnContent.innerHTML = `
+            <svg class="animate-spin h-5 w-5 text-white inline mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+              <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            </svg>
+            Procesando reserva...
+          `;
+        }
+
+        // Verificación AJAX de disponibilidad (si el endpoint existe)
+        e.preventDefault();
+        try {
+          const resp = await fetch(`/api/verificar-slot/?fecha_hora=${encodeURIComponent(fechaHora)}`);
+          if (resp.ok) {
+            const data = await resp.json();
+            if (!data.disponible) {
+              submitted = false;
+              if (btn) { btn.disabled = false; btn.style.opacity = ''; btn.style.cursor = ''; }
+              if (btnContent) {
+                btnContent.innerHTML = `Iniciar agendamiento <span class="material-symbols-outlined text-sm">payments</span>`;
+              }
+              alert('Ese horario acaba de ser tomado por otra persona. La página se actualizará.');
+              window.location.reload();
+              return;
+            }
+          }
+        } catch (_) {
+          // Si la verificación falla por red, dejamos pasar (el servidor validará)
+        }
+
+        // Enviar formulario normalmente
+        form.submit();
+      });
+
+      // Rehabilitar si el usuario vuelve con botón "atrás" del navegador
+      window.addEventListener("pageshow", function (e) {
+        if (e.persisted) {
+          submitted = false;
+          const btn = form.querySelector('button[type="submit"]');
+          if (btn) { btn.disabled = false; btn.style.opacity = ''; btn.style.cursor = ''; }
+          const btnContent = btn ? btn.querySelector('.z-10.relative') : null;
+          if (btnContent) {
+            btnContent.innerHTML = `Iniciar agendamiento <span class="material-symbols-outlined text-sm">payments</span>`;
+          }
+        }
+      });
+    }
   })();
 
+  // ── Carrusel de servicios ──
   function scrollCarousel(direction) {
     const container = document.getElementById('service-carousel');
     
@@ -499,7 +567,7 @@
   }
   let autoPlayInterval;
   const carouselContainer = document.getElementById('service-carousel');
-  const intervalTime = 5000; // 5 segundos entre cada transición
+  const intervalTime = 5000;
 
   function startAutoPlay() {
     stopAutoPlay();
@@ -513,8 +581,8 @@
   }
 
   startAutoPlay();
-  carouselContainer.addEventListener('mouseenter', stopAutoPlay); // Pausa al pasar el mouse
-  carouselContainer.addEventListener('mouseleave', startAutoPlay); // Reanuda al quitar el mouse
-  carouselContainer.addEventListener('touchstart', stopAutoPlay); // Pausa en móviles al tocar
+  carouselContainer.addEventListener('mouseenter', stopAutoPlay);
+  carouselContainer.addEventListener('mouseleave', startAutoPlay);
+  carouselContainer.addEventListener('touchstart', stopAutoPlay);
 </script>
 {% endblock %}
