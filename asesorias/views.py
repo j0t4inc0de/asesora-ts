@@ -101,6 +101,25 @@ def agendar_cita(request):
                     "Por favor, selecciona una nueva hora.")
                 return redirect(reverse('home') + '#seccion-reserva')
 
+            # Si el servicio es gratuito, no llamamos a Mercado Pago
+            if servicio_obj.precio == 0:
+                try:
+                    cita.estado_pago = 'PA'
+                    cita.estado = 'C'  # Confirmada
+                    cita.transaccion_id = f"FREE-{cita.id}-{timezone.now().strftime('%Y%m%d%H%M%S')}"
+                    cita.save()
+                    _enviar_email_confirmacion(cita)
+                    logger.info(f"RESERVA_GRATIS_OK | cita_id={cita.id}")
+                    messages.success(request, "¡Tu reserva gratuita ha sido agendada con éxito!")
+                    # Redirigir a pago_exito simulando los parámetros para que muestre la pantalla de éxito
+                    return redirect(reverse('pago_exito') + f"?payment_id={cita.transaccion_id}&external_reference={cita.id}")
+                except Exception as e:
+                    cita.estado = 'X'
+                    cita.save()
+                    logger.error(f"RESERVA_GRATIS_ERROR | cita_id={cita.id} | error={e}")
+                    messages.error(request, "Hubo un problema al procesar la reserva gratuita.")
+                    return redirect(reverse('home') + '#seccion-reserva')
+
             # --- INTEGRACION MERCADO PAGO ---
             try:
                 sdk = mercadopago.SDK(settings.MP_ACCESS_TOKEN)

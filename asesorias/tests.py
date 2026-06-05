@@ -12,7 +12,7 @@ class SistemaReservasTests(TestCase):
         self.servicio = Servicio.objects.create(
             nombre="Diagnóstico Gratuito",
             descripcion="Servicio de prueba",
-            precio=0
+            precio=10000
         )
         # Crear un horario para que obtener_slots funcione
         self.hoy = timezone.localdate()
@@ -179,3 +179,38 @@ class SistemaReservasTests(TestCase):
         self.assertEqual(cita.estado, 'X')
         self.assertEqual(cita_c.estado, 'C')
         self.assertEqual(cita_f.estado, 'P')
+
+    def test_reserva_gratuita(self):
+        # Crear servicio gratuito
+        servicio_gratis = Servicio.objects.create(
+            nombre="Charla Inicial Gratis",
+            descripcion="Charla gratuita",
+            precio=0
+        )
+
+        fecha_futura = datetime.combine(self.hoy, datetime.strptime("12:30", "%H:%M").time())
+        fecha_futura_tz = timezone.make_aware(fecha_futura)
+        fecha_str = fecha_futura_tz.strftime('%Y-%m-%d %H:%M:%S')
+
+        post_data = {
+            'nombre': 'Cliente Gratis',
+            'email': 'gratis@gmail.com',
+            'telefono': '+56987654321',
+            'rut': '12345678-5',
+            'motivo_consulta': 'Consulta gratis',
+            'fecha_hora_reserva': fecha_str,
+            'servicio': servicio_gratis.nombre
+        }
+
+        response = self.client.post(reverse('agendar_cita'), post_data)
+
+        # Debe redirigir de inmediato al éxito (pago_exito)
+        self.assertEqual(response.status_code, 302)
+        self.assertIn(reverse('pago_exito'), response.url)
+
+        # Verificar que la cita fue creada como Confirmada ('C') y Pagada ('PA')
+        cita = Cita.objects.get(fecha_hora=fecha_futura_tz)
+        self.assertEqual(cita.cliente.nombre, 'Cliente Gratis')
+        self.assertEqual(cita.estado, 'C')
+        self.assertEqual(cita.estado_pago, 'PA')
+        self.assertTrue(cita.transaccion_id.startswith('FREE-'))
