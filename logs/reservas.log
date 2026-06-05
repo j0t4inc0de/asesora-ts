@@ -19,3 +19,13 @@
 2026-06-05 02:25:44,073 INFO asesorias.reservas RESERVA_INTENTO | slot=2026-06-05 12:30:00 | IP=127.0.0.1 | servicio=Charla Inicial Gratis
 2026-06-05 02:25:44,076 INFO asesorias.reservas RESERVA_OK | cita_id=1 | slot=2026-06-05 12:30:00
 2026-06-05 02:25:45,356 INFO asesorias.reservas RESERVA_GRATIS_OK | cita_id=1
+2026-06-05 02:44:58,999 INFO asesorias.reservas RESERVA_INTENTO | slot=2026-06-05 11:00:00 | IP=127.0.0.1 | servicio=Diagnóstico Gratuito
+2026-06-05 02:44:59,001 INFO asesorias.reservas RESERVA_OK | cita_id=2 | slot=2026-06-05 11:00:00
+2026-06-05 02:44:59,041 INFO asesorias.reservas RESERVA_INTENTO | slot=2026-06-05 12:30:00 | IP=127.0.0.1 | servicio=Charla Inicial Gratis
+2026-06-05 02:44:59,043 INFO asesorias.reservas RESERVA_OK | cita_id=1 | slot=2026-06-05 12:30:00
+2026-06-05 02:45:00,367 INFO asesorias.reservas RESERVA_GRATIS_OK | cita_id=1
+2026-06-05 02:47:57,807 INFO asesorias.reservas RESERVA_INTENTO | slot=2026-06-05 11:00:00 | IP=127.0.0.1 | servicio=Diagnóstico Gratuito
+2026-06-05 02:47:57,810 INFO asesorias.reservas RESERVA_OK | cita_id=2 | slot=2026-06-05 11:00:00
+2026-06-05 02:47:57,845 INFO asesorias.reservas RESERVA_INTENTO | slot=2026-06-05 12:30:00 | IP=127.0.0.1 | servicio=Charla Inicial Gratis
+2026-06-05 02:47:57,847 INFO asesorias.reservas RESERVA_OK | cita_id=1 | slot=2026-06-05 12:30:00
+2026-06-05 02:47:59,136 INFO asesorias.reservas RESERVA_GRATIS_OK | cita_id=1

@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="max-w-4xl mx-auto px-6 py-16 mt-10">
+  <div class="bg-white p-8 md:p-12 rounded-2xl shadow-xl border border-slate-100">
+    <h1 class="text-3xl font-bold text-slate-800 mb-6 flex items-center gap-2">
+      <span class="material-symbols-outlined text-teal-500">description</span>
+      Términos y Condiciones de Servicio
+    </h1>
+    
+    <p class="text-sm text-slate-400 mb-8">Última actualización: Junio 2026</p>
+
+    <div class="prose max-w-none text-slate-600 space-y-6">
+      <p>
+        Bienvenido a <strong>AsesoraTS Chile</strong>. Al utilizar nuestro sitio web, herramientas de agendamiento y al contratar nuestras asesorías profesionales de Trabajo Social, usted acepta y se compromete a cumplir con los siguientes términos y condiciones de servicio. Por favor, léalos detenidamente.
+      </p>
+
+      <hr class="border-slate-100 my-6">
+
+      <h2 class="text-xl font-bold text-slate-700 mt-6 mb-2">1. Objeto del Servicio</h2>
+      <p>
+        AsesoraTS Chile ofrece asesorías profesionales independientes en el ámbito del Trabajo Social, incluyendo la evaluación diagnóstica, orientación de beneficios del Estado (pensiones, Registro Social de Hogares) y la redacción de Informes Sociales oficiales (vivienda, tribunales, becas u otros fines específicos).
+      </p>
+
+      <h2 class="text-xl font-bold text-slate-700 mt-6 mb-2">2. Proceso de Agendamiento y Pago</h2>
+      <ul class="list-disc pl-6 space-y-2">
+        <li>La reserva de cualquier bloque horario de asesoría se realiza a través de nuestra plataforma web y se considera válida únicamente una vez que el pago ha sido procesado de forma exitosa por la pasarela externa de Mercado Pago.</li>
+        <li>Los precios están denominados en pesos chilenos (CLP) y están exentos de IVA de acuerdo con la legislación sobre servicios profesionales de consultoría.</li>
+        <li>Si el pago es rechazado o cancelado durante la pasarela, el sistema liberará automáticamente el slot a los 30 minutos para que pueda ser reservado por otro usuario.</li>
+      </ul>
+
+      <h2 class="text-xl font-bold text-slate-700 mt-6 mb-2">3. Política de Asistencia, Puntualidad y Reagendamiento</h2>
+      <p>
+        El respeto por el tiempo tanto del profesional como de los usuarios es clave para la calidad del servicio. Por tanto:
+      </p>
+      <ul class="list-disc pl-6 space-y-2">
+        <li><strong>Tolerancia de espera</strong>: Cada sesión dura un máximo de 60 minutos. La tolerancia máxima de espera para la conexión del usuario es de <strong>15 minutos</strong>. Transcurrido ese plazo, la sesión se dará por cancelada debido a incomparecencia del cliente, sin derecho a reembolso.</li>
+        <li><strong>Reagendamiento</strong>: Si usted necesita cambiar la fecha o la hora de su cita, deberá avisar al menos con <strong>24 horas de anticipación</strong> enviando un correo a <strong>consultas.asesorats@gmail.com</strong>. De esta manera, podrá reagendar su cita sin costos adicionales en las fechas disponibles.</li>
+        <li><strong>Cancelaciones sin previo aviso</strong>: Las citas que se cancelen con menos de 24 horas de anticipación o las inasistencias injustificadas no tendrán derecho a la devolución del dinero pagado.</li>
+      </ul>
+
+      <h2 class="text-xl font-bold text-slate-700 mt-6 mb-2">4. Elaboración de Informes y Responsabilidad del Cliente</h2>
+      <p>
+        En el caso de contratar la redacción de un Informe Social:
+      </p>
+      <ul class="list-disc pl-6 space-y-2">
+        <li>El plazo ordinario de entrega de los informes terminados y firmados por la Trabajadora Social es de <strong>5 a 7 días hábiles</strong> posteriores a la sesión y a la recepción conforme de la totalidad de la documentación de respaldo que sea requerida.</li>
+        <li>El cliente se compromete a entregar antecedentes verídicos, exactos y completos. AsesoraTS Chile no asume responsabilidad alguna por el rechazo de trámites en organismos públicos o privados motivados por información falsa o incompleta proporcionada por el cliente.</li>
+        <li>El Informe Social constituye una opinión diagnóstica profesional basada en estándares técnicos, por lo que AsesoraTS Chile no puede garantizar que el resultado del trámite frente al organismo correspondiente sea aprobado, ya que esto depende del criterio del tercero evaluador.</li>
+      </ul>
+
+      <h2 class="text-xl font-bold text-slate-700 mt-6 mb-2">5. Jurisdicción</h2>
+      <p>
+        Para todos los efectos legales de este contrato de prestación de servicios profesionales, las partes fijan su domicilio en la ciudad de Santiago de Chile y se someten a la jurisdicción de sus tribunales ordinarios de justicia.
+      </p>
+    </div>
+
+    <div class="mt-10 pt-6 border-t border-slate-100 flex justify-end">
+      <a href="{% url 'home' %}" class="bg-teal-600 hover:bg-teal-700 text-white px-6 py-2 rounded-xl transition-all inline-flex items-center gap-2">
+        <span class="material-symbols-outlined text-sm">home</span> Volver al inicio
+      </a>
+    </div>
+  </div>
+</section>
+{% endblock %}

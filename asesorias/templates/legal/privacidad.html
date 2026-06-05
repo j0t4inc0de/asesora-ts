@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="max-w-4xl mx-auto px-6 py-16 mt-10">
+  <div class="bg-white p-8 md:p-12 rounded-2xl shadow-xl border border-slate-100">
+    <h1 class="text-3xl font-bold text-slate-800 mb-6 flex items-center gap-2">
+      <span class="material-symbols-outlined text-teal-500">security</span>
+      Política de Privacidad
+    </h1>
+    
+    <p class="text-sm text-slate-400 mb-8">Última actualización: Junio 2026</p>
+
+    <div class="prose max-w-none text-slate-600 space-y-6">
+      <p>
+        En <strong>AsesoraTS Chile</strong>, liderado por la Trabajadora Social profesional encargada, la privacidad y la confidencialidad de su información son prioridades fundamentales. Esta Política de Privacidad describe cómo recopilamos, utilizamos y resguardamos sus datos personales al utilizar nuestra plataforma de agendamiento y asesoría.
+      </p>
+
+      <hr class="border-slate-100 my-6">
+
+      <h2 class="text-xl font-bold text-slate-700 mt-6 mb-2">1. Información que Recopilamos</h2>
+      <p>
+        Para gestionar su reserva y realizar la correspondiente preparación de su asesoría social, recopilamos los siguientes datos personales a través de nuestro formulario de contacto:
+      </p>
+      <ul class="list-disc pl-6 space-y-2">
+        <li>Nombre completo.</li>
+        <li>RUT (Dígito verificador incluido) — Requerido para verificar identidad y emitir la documentación o boleta de honorarios profesional.</li>
+        <li>Dirección de correo electrónico — Utilizado para confirmaciones de agenda, comprobantes y envío de informes.</li>
+        <li>Teléfono de contacto — Para coordinación directa de la sesión.</li>
+        <li>Motivo de la consulta y diagnóstico inicial — Información de carácter social provista voluntariamente por el usuario para pre-evaluar el caso.</li>
+      </ul>
+
+      <h2 class="text-xl font-bold text-slate-700 mt-6 mb-2">2. Uso de la Información</h2>
+      <p>
+        Los datos recopilados se utilizan única y exclusivamente para:
+      </p>
+      <ul class="list-disc pl-6 space-y-2">
+        <li>Confirmar, reagendar o cancelar las citas de asesoría solicitadas.</li>
+        <li>Evaluar previamente los antecedentes sociales del caso para optimizar el tiempo de la sesión.</li>
+        <li>Emitir la correspondiente boleta de honorarios profesional.</li>
+        <li>Enviarle los informes sociales, documentación de respaldo o minutas acordadas tras la asesoría.</li>
+      </ul>
+
+      <h2 class="text-xl font-bold text-slate-700 mt-6 mb-2">3. Confidencialidad y Secreto Profesional</h2>
+      <p>
+        Toda la información entregada por el cliente, en especial el relato del problema y los antecedentes socioeconómicos y familiares provistos, está resguardada bajo el estricto <strong>secreto profesional</strong> del Trabajador Social, en consonancia con el Código de Ética de la profesión en Chile y las disposiciones de la <strong>Ley N° 19.628 sobre Protección de la Vida Privada</strong>.
+      </p>
+      <p>
+        Bajo ninguna circunstancia sus datos personales o sensibles serán vendidos, arrendados, compartidos o cedidos a terceros, salvo que exista una obligación legal emanada de una orden judicial expresa.
+      </p>
+
+      <h2 class="text-xl font-bold text-slate-700 mt-6 mb-2">4. Seguridad y Pasarela de Pagos (Mercado Pago)</h2>
+      <p>
+        El procesamiento de pagos electrónicos se realiza de manera 100% externa y segura a través de la pasarela de pagos <strong>Mercado Pago</strong>. 
+      </p>
+      <p>
+        <strong>AsesoraTS Chile</strong> no recopila, almacena ni tiene acceso a la información financiera, de tarjetas de crédito o de cuentas bancarias de los usuarios. Mercado Pago gestiona dichos datos con estrictos estándares de seguridad y cifrado SSL de nivel bancario.
+      </p>
+
+      <h2 class="text-xl font-bold text-slate-700 mt-6 mb-2">5. Derechos del Usuario</h2>
+      <p>
+        De acuerdo con la legislación vigente en Chile, usted tiene derecho a solicitar la rectificación, modificación o eliminación de sus datos de nuestra base de datos. Para ejercer estos derechos, puede comunicarse directamente escribiendo al correo electrónico: <strong>consultas.asesorats@gmail.com</strong>.
+      </p>
+
+      <h2 class="text-xl font-bold text-slate-700 mt-6 mb-2">6. Cambios a esta Política</h2>
+      <p>
+        Nos reservamos el derecho de modificar esta política de privacidad en cualquier momento. Cualquier cambio será publicado en esta misma sección con su respectiva fecha de actualización.
+      </p>
+    </div>
+
+    <div class="mt-10 pt-6 border-t border-slate-100 flex justify-end">
+      <a href="{% url 'home' %}" class="bg-teal-600 hover:bg-teal-700 text-white px-6 py-2 rounded-xl transition-all inline-flex items-center gap-2">
+        <span class="material-symbols-outlined text-sm">home</span> Volver al inicio
+      </a>
+    </div>
+  </div>
+</section>
+{% endblock %}

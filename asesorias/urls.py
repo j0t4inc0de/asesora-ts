@@ -11,4 +11,6 @@ urlpatterns = [
     path('webhooks/mercadopago/', views.mercadopago_webhook, name='mp_webhook'),
     path('servicio/<int:servicio_id>/', views.detalle_servicio, name='detalle_servicio'),
     path('api/verificar-slot/', views.verificar_slot, name='verificar_slot'),
+    path('terminos-y-condiciones/', views.terminos_condiciones, name='terminos_condiciones'),
+    path('politica-de-privacidad/', views.politica_privacidad, name='politica_privacidad'),
 ]

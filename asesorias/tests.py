@@ -214,3 +214,14 @@ class SistemaReservasTests(TestCase):
         self.assertEqual(cita.estado, 'C')
         self.assertEqual(cita.estado_pago, 'PA')
         self.assertTrue(cita.transaccion_id.startswith('FREE-'))
+
+    def test_paginas_legales_cargan_correctamente(self):
+        # Verificar términos y condiciones
+        resp_terminos = self.client.get(reverse('terminos_condiciones'))
+        self.assertEqual(resp_terminos.status_code, 200)
+        self.assertTemplateUsed(resp_terminos, 'legal/terminos.html')
+
+        # Verificar política de privacidad
+        resp_privacidad = self.client.get(reverse('politica_privacidad'))
+        self.assertEqual(resp_privacidad.status_code, 200)
+        self.assertTemplateUsed(resp_privacidad, 'legal/privacidad.html')

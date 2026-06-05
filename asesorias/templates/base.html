@@ -341,8 +341,25 @@
 
     <main>{% block content %}{% endblock %}</main>
 
-    <footer class="bg-slate-900 text-white p-10 text-center mt-20">
-      <p>© 2026 AsesoraTS Chile - Solución Profesional de Trabajo Social</p>
+    <footer class="bg-slate-900 text-slate-300 py-12 px-6 border-t border-slate-800 mt-20 text-sm">
+      <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+        <div class="text-center md:text-left">
+          <p class="font-semibold text-white text-base mb-1">AsesoraTS Chile</p>
+          <p class="text-slate-400 text-xs">Soluciones Profesionales de Trabajo Social</p>
+        </div>
+        
+        <div class="flex flex-wrap justify-center gap-6 text-xs font-medium">
+          <a href="{% url 'terminos_condiciones' %}" class="hover:text-teal-400 transition-colors duration-200">Términos y Condiciones</a>
+          <a href="{% url 'politica_privacidad' %}" class="hover:text-teal-400 transition-colors duration-200">Política de Privacidad</a>
+        </div>
+      </div>
+      
+      <div class="max-w-6xl mx-auto border-t border-slate-800/60 mt-8 pt-6 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-slate-500">
+        <p>
+          © 2026 AsesoraTS Chile by Samod — Un producto de <a href="https://wearesamod.com" target="_blank" rel="noopener noreferrer" class="hover:text-teal-400 transition-colors duration-200 underline underline-offset-4 decoration-slate-700 hover:decoration-teal-400">We Are Samod</a>
+        </p>
+        <p class="text-slate-600">Servicios de Consultoría Social Profesional</p>
+      </div>
     </footer>
   </body>
 </html>

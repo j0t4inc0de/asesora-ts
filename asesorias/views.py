@@ -372,3 +372,13 @@ def verificar_slot(request):
     # Verificar si existe una cita para esta hora que no esté cancelada ('X')
     ocupado = Cita.objects.filter(fecha_hora=fecha_hora_obj).exclude(estado='X').exists()
     return JsonResponse({'disponible': not ocupado})
+
+
+def terminos_condiciones(request):
+    """Renderiza la página de Términos y Condiciones de Servicio."""
+    return render(request, 'legal/terminos.html')
+
+
+def politica_privacidad(request):
+    """Renderiza la página de Política de Privacidad."""
+    return render(request, 'legal/privacidad.html')
