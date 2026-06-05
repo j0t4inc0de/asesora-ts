@@ -1,0 +1,126 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="max-w-4xl mx-auto px-6 py-16 mt-10">
+  <div class="bg-white p-8 md:p-12 rounded-2xl shadow-xl border border-slate-100">
+    <h1 class="text-3xl font-bold text-slate-800 mb-6 flex items-center gap-2">
+      <span class="material-symbols-outlined text-teal-500">folder_open</span>
+      Recursos y Enlaces de Interés
+    </h1>
+    <p class="text-slate-600 mb-10">
+      Accede a información de utilidad pública y herramientas necesarias para realizar tus trámites sociales oficiales en Chile.
+    </p>
+
+    <!-- Directorio de Enlaces de Interés Público -->
+    <h2 class="text-xl font-bold text-slate-700 mb-4 pb-2 border-b border-slate-100">Directorio de Enlaces de Interés Público</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+      
+      <a href="https://www.registrosocial.gob.cl/" target="_blank" rel="noopener noreferrer" class="group p-5 bg-slate-50 hover:bg-teal-50 rounded-xl border border-slate-200 hover:border-teal-200 transition-all duration-200 flex items-start gap-4">
+        <span class="material-symbols-outlined text-teal-500 mt-1">assignment_ind</span>
+        <div>
+          <h3 class="font-bold text-slate-800 group-hover:text-teal-700 transition-colors">Registro Social de Hogares</h3>
+          <p class="text-xs text-slate-500 mt-1">Plataforma oficial para crear, actualizar o modificar tu ficha de caracterización socioeconómica.</p>
+        </div>
+      </a>
+
+      <a href="https://www.chileatiende.gob.cl/" target="_blank" rel="noopener noreferrer" class="group p-5 bg-slate-50 hover:bg-teal-50 rounded-xl border border-slate-200 hover:border-teal-200 transition-all duration-200 flex items-start gap-4">
+        <span class="material-symbols-outlined text-teal-500 mt-1">info</span>
+        <div>
+          <h3 class="font-bold text-slate-800 group-hover:text-teal-700 transition-colors">ChileAtiende</h3>
+          <p class="text-xs text-slate-500 mt-1">Guía completa de trámites, beneficios, subsidios y servicios que ofrece el Estado de Chile.</p>
+        </div>
+      </a>
+
+      <a href="https://www.minvu.gob.cl/" target="_blank" rel="noopener noreferrer" class="group p-5 bg-slate-50 hover:bg-teal-50 rounded-xl border border-slate-200 hover:border-teal-200 transition-all duration-200 flex items-start gap-4">
+        <span class="material-symbols-outlined text-teal-500 mt-1">home</span>
+        <div>
+          <h3 class="font-bold text-slate-800 group-hover:text-teal-700 transition-colors">Minvu (Vivienda)</h3>
+          <p class="text-xs text-slate-500 mt-1">Información sobre subsidios habitacionales para compra, arriendo o mejoramiento de vivienda.</p>
+        </div>
+      </a>
+
+      <a href="https://www.pjud.cl/" target="_blank" rel="noopener noreferrer" class="group p-5 bg-slate-50 hover:bg-teal-50 rounded-xl border border-slate-200 hover:border-teal-200 transition-all duration-200 flex items-start gap-4">
+        <span class="material-symbols-outlined text-teal-500 mt-1">gavel</span>
+        <div>
+          <h3 class="font-bold text-slate-800 group-hover:text-teal-700 transition-colors">Poder Judicial</h3>
+          <p class="text-xs text-slate-500 mt-1">Consulta sobre causas legales, pensión de alimentos, medidas de protección y tribunales de familia.</p>
+        </div>
+      </a>
+      
+    </div>
+
+    <!-- Sección de Preguntas Frecuentes (FAQ) -->
+    <h2 class="text-xl font-bold text-slate-700 mb-6 pb-2 border-b border-slate-100">Preguntas Frecuentes (FAQ)</h2>
+    <div class="space-y-4" id="faq-container">
+      
+      <!-- Pregunta 1 -->
+      <div class="border border-slate-200 rounded-xl overflow-hidden transition-all duration-200 bg-slate-50/50">
+        <button class="w-full text-left p-5 font-semibold text-slate-800 hover:text-teal-600 transition-colors flex justify-between items-center" onclick="toggleFaq(1)">
+          <span>¿Qué es y para qué sirve un Informe Social?</span>
+          <span class="material-symbols-outlined transition-transform duration-200" id="faq-icon-1">expand_more</span>
+        </button>
+        <div class="hidden p-5 pt-0 text-slate-600 text-sm border-t border-slate-100 bg-white" id="faq-answer-1">
+          <p>
+            Un Informe Social es un documento técnico oficial redactado exclusivamente por un Trabajador Social. Describe, analiza y evalúa la situación socioeconómica, familiar y habitacional de un individuo o grupo familiar.
+          </p>
+          <p class="mt-2">
+            Sirve como instrumento de prueba técnico ante tribunales de familia (peritajes), solicitudes de rebaja de aranceles universitarios, postulación a subsidios especiales de vivienda, solicitudes de exención de deudas, y gestiones en municipalidades u otros organismos gubernamentales.
+          </p>
+        </div>
+      </div>
+
+      <!-- Pregunta 2 -->
+      <div class="border border-slate-200 rounded-xl overflow-hidden transition-all duration-200 bg-slate-50/50">
+        <button class="w-full text-left p-5 font-semibold text-slate-800 hover:text-teal-600 transition-colors flex justify-between items-center" onclick="toggleFaq(2)">
+          <span>¿Cómo se realiza la entrevista social online?</span>
+          <span class="material-symbols-outlined transition-transform duration-200" id="faq-icon-2">expand_more</span>
+        </button>
+        <div class="hidden p-5 pt-0 text-slate-600 text-sm border-t border-slate-100 bg-white" id="faq-answer-2">
+          <p>
+            La entrevista se realiza de manera totalmente remota y confidencial mediante una videollamada a través de plataformas seguras como Google Meet o Zoom.
+          </p>
+          <p class="mt-2">
+            Para llevarla a cabo, usted necesita una conexión a internet estable, una cámara y encontrarse en un espacio silencioso y privado que resguarde la confidencialidad de su relato familiar. Durante la entrevista, la profesional le consultará sobre su composición familiar, ingresos, gastos y salud, con el fin de levantar el diagnóstico social.
+          </p>
+        </div>
+      </div>
+
+      <!-- Pregunta 3 -->
+      <div class="border border-slate-200 rounded-xl overflow-hidden transition-all duration-200 bg-slate-50/50">
+        <button class="w-full text-left p-5 font-semibold text-slate-800 hover:text-teal-600 transition-colors flex justify-between items-center" onclick="toggleFaq(3)">
+          <span>¿Qué documentos necesito tener a mano antes de mi asesoría?</span>
+          <span class="material-symbols-outlined transition-transform duration-200" id="faq-icon-3">expand_more</span>
+        </button>
+        <div class="hidden p-5 pt-0 text-slate-600 text-sm border-t border-slate-100 bg-white" id="faq-answer-3">
+          <p>
+            Aunque los documentos finales varían según su caso particular, por regla general se recomienda contar con los siguientes documentos digitales:
+          </p>
+          <ul class="list-disc pl-5 mt-2 space-y-1">
+            <li>Cédula de identidad vigente (por ambos lados) de los integrantes mayores de edad.</li>
+            <li>Cartola del Registro Social de Hogares (RSH) actualizada.</li>
+            <li>Liquidaciones de sueldo, comprobantes de jubilación o declaraciones de gastos de los últimos 3 meses.</li>
+            <li>Certificados de salud oficiales (en caso de enfermedades crónicas o discapacidad en el grupo familiar).</li>
+            <li>Comprobantes de gastos de vivienda (arriendo, dividendo, cuentas básicas).</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<script>
+  function toggleFaq(index) {
+    const answer = document.getElementById(`faq-answer-${index}`);
+    const icon = document.getElementById(`faq-icon-${index}`);
+    
+    if (answer.classList.contains('hidden')) {
+      answer.classList.remove('hidden');
+      icon.style.transform = 'rotate(180deg)';
+    } else {
+      answer.classList.add('hidden');
+      icon.style.transform = 'rotate(0deg)';
+    }
+  }
+</script>
+{% endblock %}

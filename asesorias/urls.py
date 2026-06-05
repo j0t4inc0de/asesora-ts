@@ -13,4 +13,6 @@ urlpatterns = [
     path('api/verificar-slot/', views.verificar_slot, name='verificar_slot'),
     path('terminos-y-condiciones/', views.terminos_condiciones, name='terminos_condiciones'),
     path('politica-de-privacidad/', views.politica_privacidad, name='politica_privacidad'),
+    path('recursos/', views.recursos, name='recursos'),
+    path('contacto/', views.contacto, name='contacto'),
 ]

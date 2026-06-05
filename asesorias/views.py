@@ -382,3 +382,13 @@ def terminos_condiciones(request):
 def politica_privacidad(request):
     """Renderiza la página de Política de Privacidad."""
     return render(request, 'legal/privacidad.html')
+
+
+def recursos(request):
+    """Renderiza la página de Recursos e Enlaces de Interés."""
+    return render(request, 'recursos.html')
+
+
+def contacto(request):
+    """Renderiza la página de Contacto y Consultas Directas."""
+    return render(request, 'contacto.html')

@@ -239,8 +239,8 @@
           <a class="text-slate-500 font-medium hover:text-[#1A2B3C] transition-all duration-200" href="#seccion-servicios">Servicios</a>
           <a class="text-slate-500 font-medium hover:text-[#1A2B3C] transition-all duration-200" href="/about/">Sobre mi</a>
           <!-- Hay que definir bien con Antonia, que se debe poner aqui: Recursos, Contacto -->
-          <a class="text-slate-500 font-medium hover:text-[#1A2B3C] transition-all duration-200" href="#">Recursos</a>
-          <a class="text-slate-500 font-medium hover:text-[#1A2B3C] transition-all duration-200" href="#">Contacto</a>
+          <a class="text-slate-500 font-medium hover:text-[#1A2B3C] transition-all duration-200" href="{% url 'recursos' %}">Recursos</a>
+          <a class="text-slate-500 font-medium hover:text-[#1A2B3C] transition-all duration-200" href="{% url 'contacto' %}">Contacto</a>
         </div>
 
         <!-- CTAs desktop -->
@@ -283,11 +283,11 @@
           <span class="material-symbols-outlined text-slate-400" style="font-size:20px;">person</span>
           Sobre mí
         </a>
-        <a href="#" onclick="closeMobileMenu()" class="flex items-center gap-3 text-slate-700 font-medium px-3 py-3 rounded-xl hover:bg-sky-50 hover:text-sky-700 transition-colors">
+        <a href="{% url 'recursos' %}" onclick="closeMobileMenu()" class="flex items-center gap-3 text-slate-700 font-medium px-3 py-3 rounded-xl hover:bg-sky-50 hover:text-sky-700 transition-colors">
           <span class="material-symbols-outlined text-slate-400" style="font-size:20px;">menu_book</span>
           Recursos
         </a>
-        <a href="#" onclick="closeMobileMenu()" class="flex items-center gap-3 text-slate-700 font-medium px-3 py-3 rounded-xl hover:bg-sky-50 hover:text-sky-700 transition-colors">
+        <a href="{% url 'contacto' %}" onclick="closeMobileMenu()" class="flex items-center gap-3 text-slate-700 font-medium px-3 py-3 rounded-xl hover:bg-sky-50 hover:text-sky-700 transition-colors">
           <span class="material-symbols-outlined text-slate-400" style="font-size:20px;">mail</span>
           Contacto
         </a>
@@ -349,6 +349,8 @@
         </div>
         
         <div class="flex flex-wrap justify-center gap-6 text-xs font-medium">
+          <a href="{% url 'recursos' %}" class="hover:text-teal-400 transition-colors duration-200">Recursos</a>
+          <a href="{% url 'contacto' %}" class="hover:text-teal-400 transition-colors duration-200">Contacto</a>
           <a href="{% url 'terminos_condiciones' %}" class="hover:text-teal-400 transition-colors duration-200">Términos y Condiciones</a>
           <a href="{% url 'politica_privacidad' %}" class="hover:text-teal-400 transition-colors duration-200">Política de Privacidad</a>
         </div>
